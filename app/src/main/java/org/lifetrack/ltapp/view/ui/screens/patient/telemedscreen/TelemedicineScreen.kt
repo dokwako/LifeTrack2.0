@@ -1,4 +1,4 @@
-package org.lifetrack.ltapp.view.ui.screens.patient.telemed_screen
+package org.lifetrack.ltapp.view.ui.screens.patient.telemedscreen
 
 //noinspection SuspiciousImport
 import android.R

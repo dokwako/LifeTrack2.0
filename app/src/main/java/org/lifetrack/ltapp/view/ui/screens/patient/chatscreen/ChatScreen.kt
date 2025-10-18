@@ -1,4 +1,4 @@
-package org.lifetrack.ltapp.view.ui.screens.patient.chat_screen
+package org.lifetrack.ltapp.view.ui.screens.patient.chatscreen
 //
 //import android.util.Log
 //import android.widget.Toast

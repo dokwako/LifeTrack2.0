@@ -1,4 +1,4 @@
-package org.lifetrack.ltapp.view.ui.screens.patient.signup_screen
+package org.lifetrack.ltapp.view.ui.screens.patient.signupscreen
 //
 //import androidx.compose.animation.AnimatedVisibility
 //import androidx.compose.animation.core.tween

@@ -1,4 +1,4 @@
-package org.lifetrack.ltapp.view.ui.screens.patient.login_screen
+package org.lifetrack.ltapp.view.ui.screens.patient.loginscreen
 //
 //import androidx.compose.foundation.background
 //import androidx.compose.foundation.layout.*

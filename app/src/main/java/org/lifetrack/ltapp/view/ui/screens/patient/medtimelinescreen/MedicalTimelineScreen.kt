@@ -1,4 +1,4 @@
-package org.lifetrack.ltapp.view.ui.screens.patient.medtimeline_screen
+package org.lifetrack.ltapp.view.ui.screens.patient.medtimelinescreen
 //
 //import androidx.compose.animation.AnimatedVisibility
 //import androidx.compose.animation.core.tween

@@ -1,4 +1,4 @@
-package org.lifetrack.ltapp.view.ui.screens.patient.home_screen
+package org.lifetrack.ltapp.view.ui.screens.patient.homescreen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border

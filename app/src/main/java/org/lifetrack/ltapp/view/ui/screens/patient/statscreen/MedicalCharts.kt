@@ -1,4 +1,4 @@
-package org.lifetrack.ltapp.view.ui.screens.patient.stat_screen
+package org.lifetrack.ltapp.view.ui.screens.patient.statscreen
 //
 //import android.annotation.SuppressLint
 //import android.graphics.Typeface

@@ -7,14 +7,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.CoroutineScope
-import org.lifetrack.ltapp.view.ui.screens.patient.about_screen.AboutScreen
-import org.lifetrack.ltapp.view.ui.screens.patient.other_screen.OtherScreen
-import org.lifetrack.ltapp.view.ui.screens.patient.guide_screen.HelpSupportScreen
-import org.lifetrack.ltapp.view.ui.screens.patient.home_screen.HomeScreen
-import org.lifetrack.ltapp.view.ui.screens.patient.menu_screen.MenuScreen
-import org.lifetrack.ltapp.view.ui.screens.patient.profile_screen.ProfileScreen
+import org.lifetrack.ltapp.view.ui.screens.patient.aboutscreen.AboutScreen
+import org.lifetrack.ltapp.view.ui.screens.patient.otherscreen.OtherScreen
+import org.lifetrack.ltapp.view.ui.screens.patient.guidescreen.HelpSupportScreen
+import org.lifetrack.ltapp.view.ui.screens.patient.homescreen.HomeScreen
+import org.lifetrack.ltapp.view.ui.screens.patient.menuscreen.MenuScreen
+import org.lifetrack.ltapp.view.ui.screens.patient.profilescreen.ProfileScreen
 import org.lifetrack.ltapp.view.ui.screens.SplashScreen
-import org.lifetrack.ltapp.view.ui.screens.patient.telemed_screen.TelemedicineScreen
+import org.lifetrack.ltapp.view.ui.screens.patient.telemedscreen.TelemedicineScreen
 
 @Composable
 fun AppNavigation(scope: CoroutineScope) {
