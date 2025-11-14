@@ -1,4 +1,4 @@
-package org.lifetrack.ltapp.view.ui.screens.components
+package org.lifetrack.ltapp.view.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -22,6 +22,7 @@ import org.lifetrack.ltapp.R
 import kotlinx.coroutines.delay
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import org.lifetrack.ltapp.view.ui.theme.Purple80
 
 @Composable
@@ -69,3 +70,9 @@ fun LTBrandAppBar(modifier: Modifier = Modifier) {
         )
     }
 }
+
+//@Preview
+//@Composable
+//fun LTBrandAppBarPreview() {
+//    LTBrandAppBar()
+//}
