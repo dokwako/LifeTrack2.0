@@ -49,7 +49,7 @@ fun FeatureGrid(navController: NavController) {
             GlassActionCard(
                 "Emergency Alerts",
                 Icons.Filled.Notifications
-            ) { navController.navigate("") }
+            ) { navController.navigate("alerts") }
         }
         item {
             GlassActionCard("Messaging & Referrals",

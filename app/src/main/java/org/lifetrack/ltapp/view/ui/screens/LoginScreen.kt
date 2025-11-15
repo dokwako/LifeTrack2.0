@@ -24,7 +24,7 @@ import org.lifetrack.ltapp.model.repository.AuthRepositoryImpl
 import org.lifetrack.ltapp.presenter.AuthPresenter
 import org.lifetrack.ltapp.view.ui.state.UIState
 import org.lifetrack.ltapp.view.AuthView
-import org.lifetrack.ltapp.view.components.LTBrandAppBar
+import org.lifetrack.ltapp.view.components.loginscreen.LTBrandAppBar
 import org.lifetrack.ltapp.view.ui.theme.LTAppTheme
 
 @Composable

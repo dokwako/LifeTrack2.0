@@ -123,11 +123,11 @@ fun AboutScreen(navController: NavController) {
                         style = MaterialTheme.typography.bodyMedium
                     )
 
-                    HorizontalDivider(
-                        modifier = Modifier.padding(vertical = 8.dp),
-                        thickness = 1.dp,
-                        color = Color(0xFFE9ECEF)
-                    )
+//                    HorizontalDivider(
+//                        modifier = Modifier.padding(vertical = 8.dp),
+//                        thickness = 1.dp,
+//                        color = Color(0xFFE9ECEF)
+//                    )
 
                     Text(
                         text = "Key Features",
@@ -218,16 +218,13 @@ fun AboutScreen(navController: NavController) {
 //                  Spacer(modifier = Modifier.height(10.dp))
 
                     Text(
-                        text = "© 2023 LifeTrack. All rights reserved.",
+                        text = "        © 2023 LifeTrack. All rights reserved.",
                         style = MaterialTheme.typography.bodySmall.copy(
                             color = Color(0xFF6C757D)
                         )
                     )
                 }
             }
-
-
-
         }
     }
 }

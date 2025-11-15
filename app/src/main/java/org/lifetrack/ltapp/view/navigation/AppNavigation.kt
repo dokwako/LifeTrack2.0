@@ -82,24 +82,20 @@ fun AppNavigation(scope: CoroutineScope) {
         composable("splash") {
             SplashScreen(navController)
         }
-
         composable("login") {
             LoginScreen(navController, authPresenter)
         }
-
         composable("signup") {
             RegistrationScreen(
                 navController = navController,
                 presenter = authPresenter
             )
         }
-
         composable("home") {
             HomeScreen(
                 navController = navController
             )
         }
-
         composable("alma"){
             ChatScreen(
                 navController = navController,
@@ -110,13 +106,11 @@ fun AppNavigation(scope: CoroutineScope) {
                 navController = navController,
             )
         }
-
         composable("menu"){
             MenuScreen(
                 navController = navController
             )
         }
-
         composable("restore") {
             RestoreScreen(
                 navController = navController
@@ -128,7 +122,7 @@ fun AppNavigation(scope: CoroutineScope) {
 //        composable("expert") { ExpertScreen(navController) }
 //        composable("med_timeline") { MedicalTimelineScreen(navController) }
         composable("telemedicine") { TelemedicineScreen(navController) }
-//        composable("epidemic_alert") { EpidemicAlertScreen(navController) }
+        composable("alerts") { AlertScreen(navController) }
 //        composable("info_hub") { InfoHubScreen(navController) }
         composable("other") { OtherScreen(navController) }
         composable("support") {
