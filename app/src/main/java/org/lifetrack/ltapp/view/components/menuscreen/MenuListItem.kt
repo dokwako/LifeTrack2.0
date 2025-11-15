@@ -12,8 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import org.lifetrack.ltapp.view.ui.theme.Purple40
-import org.lifetrack.ltapp.view.ui.theme.Purple80
+
 
 @Composable
 fun MenuListItem(

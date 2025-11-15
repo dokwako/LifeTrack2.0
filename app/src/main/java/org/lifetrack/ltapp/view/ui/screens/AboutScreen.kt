@@ -1,7 +1,6 @@
 package org.lifetrack.ltapp.view.ui.screens
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -21,7 +20,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import org.lifetrack.ltapp.view.components.aboutscreen.FeatureItem
-import org.lifetrack.ltapp.view.ui.theme.Purple40
 
 
 @OptIn(ExperimentalMaterial3Api::class)
