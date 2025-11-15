@@ -10,7 +10,9 @@ import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import org.lifetrack.ltapp.model.repository.AuthRepositoryImpl
+import org.lifetrack.ltapp.presenter.AlmaPresenter
 import org.lifetrack.ltapp.presenter.AuthPresenter
+import org.lifetrack.ltapp.view.AlmaView
 import org.lifetrack.ltapp.view.AuthView
 import org.lifetrack.ltapp.view.ui.screens.*
 
@@ -54,6 +56,24 @@ fun AppNavigation(scope: CoroutineScope) {
         },
         authRepository = authRepository,
     )
+    val almaPresenter = AlmaPresenter(
+        view = object: AlmaView {
+            override fun displayAlmaResponse() {
+
+            }
+            override fun showError() {
+
+            }
+
+            override fun showLoading() {
+
+            }
+
+            override fun hideLoading() {
+
+            }
+        }
+    )
 
     NavHost(
         navController = navController,
@@ -63,9 +83,9 @@ fun AppNavigation(scope: CoroutineScope) {
             SplashScreen(navController)
         }
 
-//        composable("login") {
-//            LoginScreen(navController, authPresenter)
-//        }
+        composable("login") {
+            LoginScreen(navController, authPresenter)
+        }
 
         composable("signup") {
             RegistrationScreen(
@@ -83,23 +103,14 @@ fun AppNavigation(scope: CoroutineScope) {
             )
         }
 
-//        composable("chat"){
-//            ChatScreen(
-//                navController = navController,
-//                presenter = chatPresenter)
-//        }
+        composable("alma"){
+            ChatScreen(
+                navController = navController,
+                presenter = almaPresenter)
+        }
         composable("profile"){
             ProfileScreen(
                 navController = navController,
-//                userRepository = userRepository,
-//                onLogout = {
-//                    scope.launch {
-//                        authRepository.logout()
-//                        navController.navigate("login") {
-//                            popUpTo("home") { inclusive = true }
-//                        }
-//                    }
-//                }
             )
         }
 

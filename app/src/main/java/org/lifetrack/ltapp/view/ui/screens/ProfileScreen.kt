@@ -101,7 +101,6 @@ fun ProfileScreen(navController: NavController) {
                         leftIconColor = colorScheme.primary,
                         title = "Delete My Account",
                         onClick = {
-
                             navController.navigate("login")
                         }
                     )
