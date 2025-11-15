@@ -31,6 +31,7 @@ import coil.compose.rememberAsyncImagePainter
 import org.lifetrack.ltapp.view.components.profilescreen.CustomProfileMenuItem
 import org.lifetrack.ltapp.view.components.profilescreen.ProfileMenuItem
 import org.lifetrack.ltapp.view.ui.theme.LTAppTheme
+import org.lifetrack.ltapp.view.ui.theme.Purple80
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -50,7 +51,8 @@ fun ProfileScreen(navController: NavController) {
                     IconButton({ navController.popBackStack() }) {
                         Icon(
                             imageVector = Icons.Default.ArrowCircleLeft,
-                            contentDescription = "Back"
+                            contentDescription = "Back",
+                            tint = if (isSystemInDarkTheme()) Color.Black else LocalContentColor.current
                         )
                     }
                 },
@@ -115,7 +117,7 @@ fun ProfileScreen(navController: NavController) {
                     ProfileMenuItem(icon = Icons.Default.Person, title = "Personal Information", onClick = {})
                     ProfileMenuItem(icon = Icons.AutoMirrored.Filled.List, title = "My Medical History", onClick = {})
 //                    ProfileMenuItem(icon = Icons.Default.Refresh, title = "Refund")
-                    ProfileMenuItem(icon = Icons.Default.Lock, title = "Change Password", onClick = {})
+                    ProfileMenuItem(icon = Icons.Default.Lock, title = "Change Password", onClick = { navController.navigate("restore") })
                     ProfileMenuItem(icon = Icons.Default.Language, title = "Change Language", onClick = {})
                     CustomProfileMenuItem(
                         icon = Icons.Default.Delete,

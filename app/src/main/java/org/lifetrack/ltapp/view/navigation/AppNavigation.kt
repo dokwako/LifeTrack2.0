@@ -117,7 +117,7 @@ fun AppNavigation(scope: CoroutineScope) {
             )
         }
 
-        composable("reset") {
+        composable("restore") {
             RestoreScreen(
                 navController = navController
             )

@@ -1,3 +1,9 @@
 package org.lifetrack.ltapp.model.data
 
-data class MenuItemData()
+import androidx.compose.ui.graphics.vector.ImageVector
+
+data class MenuItemData(
+    val title: String,
+    val icon: ImageVector,
+    val route: String
+)
