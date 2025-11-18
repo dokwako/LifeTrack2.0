@@ -12,9 +12,9 @@ import kotlinx.coroutines.launch
 import org.lifetrack.ltapp.model.repository.AuthRepositoryImpl
 import org.lifetrack.ltapp.presenter.AlmaPresenter
 import org.lifetrack.ltapp.presenter.AuthPresenter
-import org.lifetrack.ltapp.view.AlmaView
-import org.lifetrack.ltapp.view.AuthView
-import org.lifetrack.ltapp.view.ui.screens.*
+import org.lifetrack.ltapp.ui.view.AlmaView
+import org.lifetrack.ltapp.ui.view.AuthView
+import org.lifetrack.ltapp.ui.screens.*
 
 @SuppressLint("ViewModelConstructorInComposable")
 @Composable

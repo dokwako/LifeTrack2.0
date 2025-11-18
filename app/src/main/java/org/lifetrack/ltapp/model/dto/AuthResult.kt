@@ -1,4 +1,4 @@
-package org.lifetrack.ltapp.model.data.dto
+package org.lifetrack.ltapp.model.dto
 
 sealed class AuthResult {
     data object Success : AuthResult()

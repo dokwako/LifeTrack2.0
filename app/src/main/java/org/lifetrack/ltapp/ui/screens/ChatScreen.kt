@@ -14,14 +14,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 //import com.example.lifetrack.presenter.ChatPresenter
 //import com.example.lifetrack.view.AIChatView
 import kotlinx.coroutines.launch
-import org.lifetrack.ltapp.model.data.dto.AlmaMessage
+import org.lifetrack.ltapp.model.dto.AlmaMessage
 import org.lifetrack.ltapp.presenter.AlmaPresenter
-import org.lifetrack.ltapp.view.components.chatscreen.ChatBubble
+import org.lifetrack.ltapp.presenter.mock.almaMockPresenter
+import org.lifetrack.ltapp.ui.theme.LTAppTheme
+import org.lifetrack.ltapp.ui.components.chatscreen.ChatBubble
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -127,3 +131,14 @@ fun ChatScreen(
 }
 
 
+@Preview
+@Composable
+fun PreviewChatScreen() {
+    val navController = rememberNavController()
+    LTAppTheme {
+        ChatScreen(
+            navController,
+            almaMockPresenter
+        )
+    }
+}

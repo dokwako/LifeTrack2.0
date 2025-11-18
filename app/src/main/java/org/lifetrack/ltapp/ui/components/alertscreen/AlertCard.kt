@@ -36,10 +36,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import org.lifetrack.ltapp.R
 import org.lifetrack.ltapp.model.data.EpidemicAlert
-import org.lifetrack.ltapp.view.ui.theme.CriticalAlert
-import org.lifetrack.ltapp.view.ui.theme.HighAlert
-import org.lifetrack.ltapp.view.ui.theme.MediumAlert
-import org.lifetrack.ltapp.view.ui.theme.LowAlert
+import org.lifetrack.ltapp.ui.theme.CriticalAlert
+import org.lifetrack.ltapp.ui.theme.HighAlert
+import org.lifetrack.ltapp.ui.theme.MediumAlert
+import org.lifetrack.ltapp.ui.theme.LowAlert
 
 @Composable
 fun AlertSummaryCard() {
