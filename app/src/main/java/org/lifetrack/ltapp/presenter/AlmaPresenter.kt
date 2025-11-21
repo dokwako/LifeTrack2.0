@@ -6,7 +6,7 @@ import org.lifetrack.ltapp.ui.view.AlmaView
 class AlmaPresenter(
     view : AlmaView
 ): ViewModel() {
-    suspend fun sendMessage(message: String){
+    fun sendMessage(message: String){
 
     }
 }

@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import org.lifetrack.ltapp.model.data.medicalVisits
 import kotlinx.coroutines.delay
-import org.lifetrack.ltapp.view.ui.theme.Purple40
+import org.lifetrack.ltapp.ui.theme.Purple40
 
 
 @OptIn(ExperimentalMaterial3Api::class)

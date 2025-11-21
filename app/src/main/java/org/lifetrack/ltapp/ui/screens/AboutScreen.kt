@@ -19,7 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import org.lifetrack.ltapp.view.components.aboutscreen.FeatureItem
+import org.lifetrack.ltapp.ui.components.aboutscreen.FeatureItem
 
 
 @OptIn(ExperimentalMaterial3Api::class)
