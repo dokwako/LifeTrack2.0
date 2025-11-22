@@ -5,10 +5,10 @@ import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.Chat
 import androidx.compose.material.icons.automirrored.filled.ContactSupport
 import androidx.compose.material.icons.automirrored.filled.HelpOutline
+import androidx.compose.material.icons.filled.ArrowCircleLeft
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Phone
@@ -23,6 +23,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import org.koin.androidx.compose.koinViewModel
+import org.lifetrack.ltapp.presenter.SupportPresenter
 import org.lifetrack.ltapp.utils.openDialer
 import org.lifetrack.ltapp.utils.openEmail
 import org.lifetrack.ltapp.ui.components.supportscreen.ContactItem
@@ -32,7 +34,10 @@ import org.lifetrack.ltapp.ui.theme.LTAppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SupportScreen(navController: NavController) {
+fun SupportScreen(
+    navController: NavController,
+    presenter: SupportPresenter
+    ) {
     val context = LocalContext.current
 
     Scaffold(
@@ -47,7 +52,7 @@ fun SupportScreen(navController: NavController) {
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
-                            Icons.AutoMirrored.Filled.ArrowBack,
+                            Icons.Default.ArrowCircleLeft,
                             contentDescription = "Back",
                             tint = MaterialTheme.colorScheme.onPrimaryContainer
                         )
@@ -70,37 +75,37 @@ fun SupportScreen(navController: NavController) {
                 .padding(innerPadding)
                 .fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(24.dp),
-            contentPadding = PaddingValues(horizontal = 10.dp, vertical = 10.dp)
+            contentPadding = PaddingValues(horizontal = 5.dp, vertical = 10.dp)
         ) {
             item {
                 SectionCard(
                     title = "Frequently Asked Questions",
                     icon = Icons.AutoMirrored.Filled.HelpOutline
                 ) {
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.height(10.dp))
                     FAQItem(
                         question = "How do I reset my password?",
-                        answer = "Go to Profile > Settings > Reset Password."
+                        answer = "Go to Profile > Settings > Reset Password.",
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     FAQItem(
                         question = "How to contact a doctor?",
-                        answer = "Use the Telemedicine feature on your home screen."
+                        answer = "Use the Telemedicine feature on your home screen.",
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     FAQItem(
                         question = "Where can I view my medical records?",
-                        answer = "Tap Medical Timeline on the home screen."
+                        answer = "Tap Medical Timeline on the home screen.",
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     FAQItem(
                         question = "How do I update my profile information?",
-                        answer = "Navigate to Profile > Edit Profile to update your details."
+                        answer = "Navigate to Profile > Edit Profile to update your details.",
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     FAQItem(
                         question = "What should I do in an emergency?",
-                        answer = "Use the Emergency Alert button on the home screen to notify your emergency contacts."
+                        answer = "Use the Emergency Alert button on the home screen to notify your emergency contacts.",
                     )
                 }
             }
@@ -114,22 +119,19 @@ fun SupportScreen(navController: NavController) {
                     ContactItem(
                         icon = Icons.Default.Email,
                         label = "Email Support",
-                        value = "support@lifetrack.app",
-                        actionLabel = "Send Email",
+                        value = "support@lifetrack.org",
                         onClick = { context.openEmail("support@lifetrack.app") }
                     )
                     ContactItem(
                         icon = Icons.Default.Phone,
                         label = "Phone Support",
-                        value = "+254 790 038 365",
-                        actionLabel = "Call Now",
+                        value = "+254 790 938 365",
                         onClick = { context.openDialer("+254790038365") }
                     )
                     ContactItem(
                         icon = Icons.AutoMirrored.Default.Chat,
                         label = "Live Chat",
                         value = "Available 24/7",
-                        actionLabel = "Start Chat",
                         onClick = { }
                     )
                 }
@@ -157,7 +159,7 @@ fun SupportScreen(navController: NavController) {
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                         Text(
-                            text = "1.0.0",
+                            text = presenter.version,
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurface
                         )
@@ -188,6 +190,7 @@ fun PreviewSupportScreen(){
     LTAppTheme {
         SupportScreen(
             navController = navController,
+            koinViewModel<SupportPresenter>()
         )
     }
 

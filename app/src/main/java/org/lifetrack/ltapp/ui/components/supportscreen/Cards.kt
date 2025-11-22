@@ -1,6 +1,8 @@
 package org.lifetrack.ltapp.ui.components.supportscreen
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -27,6 +29,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import org.lifetrack.ltapp.ui.theme.GradientEnd
+import org.lifetrack.ltapp.ui.theme.PurpleGrey40
 
 @Composable
 fun SectionCard(
@@ -39,7 +43,7 @@ fun SectionCard(
             .fillMaxWidth(),
 //            .padding(10.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant
+            containerColor = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.background else MaterialTheme.colorScheme.surfaceVariant
         ),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
@@ -62,7 +66,7 @@ fun SectionCard(
                 Text(
                     text = title,
                     style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.SemiBold),
-                    color = MaterialTheme.colorScheme.onSurface
+                    color = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface
                 )
             }
             content()
@@ -75,15 +79,15 @@ fun ContactItem(
     icon: ImageVector,
     label: String,
     value: String,
-    actionLabel: String,
     onClick: () -> Unit
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 4.dp),
+            .padding(vertical = 4.dp)
+            .clickable(onClick = onClick),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface
+            containerColor = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.primaryContainer.copy(.2f) else MaterialTheme.colorScheme.surface
         ),
         elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
         shape = RoundedCornerShape(12.dp)
@@ -91,7 +95,7 @@ fun ContactItem(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .padding(10.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Box(
@@ -108,14 +112,16 @@ fun ContactItem(
                     imageVector = icon,
                     contentDescription = label,
                     tint = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.size(20.dp)
+                    modifier = Modifier
+                        .size(20.dp)
+                        .clickable(onClick = onClick)
                 )
             }
-
-            Spacer(modifier = Modifier.width(16.dp))
-
+            Spacer(modifier = Modifier.width(10.dp))
             Column(
-                modifier = Modifier.weight(1f)
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxWidth()
             ) {
                 Text(
                     text = label,
@@ -128,19 +134,20 @@ fun ContactItem(
                     color = MaterialTheme.colorScheme.onSurface
                 )
             }
+//            Spacer(modifier = Modifier.width(8.dp))
 
-            Spacer(modifier = Modifier.width(8.dp))
-
-            FilledTonalButton(
-                onClick = onClick,
-                shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.height(36.dp)
-            ) {
-                Text(
-                    text = actionLabel,
-                    style = MaterialTheme.typography.labelMedium
-                )
-            }
+//            FilledTonalButton(
+//                onClick = onClick,
+//                shape = RoundedCornerShape(8.dp),
+//                modifier = Modifier
+//                    .height(36.dp)
+//                    .width(56.dp)
+//            ) {
+//                Text(
+//                    text = actionLabel,
+//                    style = MaterialTheme.typography.labelMedium
+//                )
+//            }
         }
     }
 }

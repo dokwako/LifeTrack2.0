@@ -40,7 +40,7 @@ fun AboutScreen(navController: NavController) {
                         Icon(
                             Icons.Default.ArrowCircleLeft,
                             contentDescription = "Back",
-                            tint = Color(0xFF2E5EAA)
+//                            tint = Color(0xFF2E5EAA)
                         )
                     }
                 },

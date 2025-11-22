@@ -9,6 +9,7 @@ import kotlinx.coroutines.CoroutineScope
 import org.koin.androidx.compose.koinViewModel
 import org.lifetrack.ltapp.presenter.AlmaPresenter
 import org.lifetrack.ltapp.presenter.AuthPresenter
+import org.lifetrack.ltapp.presenter.SupportPresenter
 import org.lifetrack.ltapp.ui.screens.*
 
 //@SuppressLint("ViewModelConstructorInComposable")
@@ -20,7 +21,6 @@ fun AppNavigation(
     val context = LocalContext.current
 //    val authRepository = koinInject<AuthRepository>()
     val authPresenter = koinViewModel<AuthPresenter>()
-    val almaPresenter = koinViewModel<AlmaPresenter>()
 
     NavHost(
         navController = navController,
@@ -46,7 +46,7 @@ fun AppNavigation(
         composable("alma"){
             ChatScreen(
                 navController = navController,
-                presenter = almaPresenter)
+                presenter = koinViewModel<AlmaPresenter>())
         }
         composable("profile"){
             ProfileScreen(
@@ -73,7 +73,10 @@ fun AppNavigation(
 //        composable("info_hub") { InfoHubScreen(navController) }
         composable("other") { OtherScreen(navController) }
         composable("support") {
-             SupportScreen(navController)
+             SupportScreen(
+                 navController = navController,
+                 presenter = koinViewModel<SupportPresenter>()
+             )
         }
         composable("about"){
             AboutScreen(navController)

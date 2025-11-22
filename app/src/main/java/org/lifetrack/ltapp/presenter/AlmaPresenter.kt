@@ -9,7 +9,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.lifetrack.ltapp.model.dto.AlmaMessage
 
-class AlmaPresenter(): ViewModel() {
+class AlmaPresenter: ViewModel() {
 
     var userInput by mutableStateOf("")
         private set

@@ -156,12 +156,12 @@ fun MenuScreen(navController: NavController) {
 
 private fun getMenuItems() = listOf(
     MenuItemData("Health Records", Icons.Filled.MedicalServices, "medical_timeline"),
-    MenuItemData("Appointments", Icons.Filled.CalendarToday, "telemedicine"),
     MenuItemData("Medications", Icons.Filled.Medication, "additional_features"),
-    MenuItemData("Telemedicine", Icons.Filled.VideoCall, "telemedicine"),
+    MenuItemData("Appointments", Icons.Filled.CalendarToday, "telemedicine"),
+    MenuItemData("Tele-Medicine", Icons.Filled.VideoCall, "telemedicine"),
     MenuItemData("Emergency Contacts", Icons.Filled.Emergency, "epidemic_alert"),
-    MenuItemData("Help & Support", Icons.AutoMirrored.Filled.Help, "support"),
-    MenuItemData("About", Icons.Filled.Info, "about")
+//    MenuItemData("Help & Support", Icons.AutoMirrored.Filled.Help, "support"),
+    MenuItemData("About LifeTrack", Icons.Filled.Info, "about")
 )
 
 @RequiresApi(Build.VERSION_CODES.S)

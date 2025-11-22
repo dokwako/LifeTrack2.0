@@ -90,7 +90,6 @@ fun LifeTrackTopBar(
     actionIcon: ImageVector? = null,
     actionCallback: () -> Unit
 ) {
-
     TopAppBar(
         title = {
             Text(
@@ -112,7 +111,7 @@ fun LifeTrackTopBar(
                 IconButton(onClick = actionCallback) {
                     Icon(
                         imageVector = actionIcon,
-                        contentDescription = "Profile"
+                        contentDescription = "Action"
                     )
                 }
             }
@@ -124,6 +123,6 @@ fun LifeTrackTopBar(
             actionIconContentColor = MaterialTheme.colorScheme.onPrimaryContainer
         ),
         modifier = modifier,
-//        scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+        scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
     )
 }
