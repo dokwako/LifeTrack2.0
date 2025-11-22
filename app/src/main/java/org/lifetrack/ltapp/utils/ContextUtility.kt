@@ -2,9 +2,10 @@ package org.lifetrack.ltapp.utils
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
+//import android.net.Uri
 import android.widget.Toast
 import androidx.core.net.toUri
+
 
 fun Context.openEmail(email: String) {
     try {
