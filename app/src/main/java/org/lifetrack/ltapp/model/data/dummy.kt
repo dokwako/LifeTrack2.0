@@ -1,7 +1,7 @@
 package org.lifetrack.ltapp.model.data
 
-import androidx.compose.runtime.remember
 import org.lifetrack.ltapp.R
+import org.lifetrack.ltapp.model.dto.Message
 import java.time.LocalDate
 import java.util.Date
 

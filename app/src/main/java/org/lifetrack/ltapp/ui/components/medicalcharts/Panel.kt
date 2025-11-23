@@ -26,7 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
-import org.lifetrack.ltapp.model.data.Message
+import org.lifetrack.ltapp.model.dto.Message
 
 @Composable
 fun ChatPanel(messages: List<Message>) {

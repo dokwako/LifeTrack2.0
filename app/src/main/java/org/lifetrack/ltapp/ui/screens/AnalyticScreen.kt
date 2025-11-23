@@ -1,6 +1,8 @@
 package org.lifetrack.ltapp.ui.screens
 
 import android.annotation.SuppressLint
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
@@ -11,10 +13,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import org.lifetrack.ltapp.model.data.*
 import org.lifetrack.ltapp.ui.components.medicalcharts.*
+import org.lifetrack.ltapp.ui.theme.LTAppTheme
 
 @SuppressLint("SimpleDateFormat")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -131,8 +136,13 @@ fun AnalyticScreen(navController: NavController) {
         }
     }
 }
-
-
-
-
-
+@RequiresApi(Build.VERSION_CODES.S)
+@Preview
+@Composable
+fun PreviewAnalyticScreen(){
+    LTAppTheme {
+        AnalyticScreen(
+            navController = rememberNavController()
+        )
+    }
+}
