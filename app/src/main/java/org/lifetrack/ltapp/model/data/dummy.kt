@@ -1,7 +1,9 @@
 package org.lifetrack.ltapp.model.data
 
+import androidx.compose.runtime.remember
 import org.lifetrack.ltapp.R
 import java.time.LocalDate
+import java.util.Date
 
 val epidemicAlerts = listOf(
     EpidemicAlert(
@@ -112,4 +114,65 @@ val medicalVisits = listOf(
         doctor = "Mercy Baraka",
         hospital = "Rift Valley Provincial Hospital"
     )
+)
+
+val bPressureData = sortedMapOf(
+        Date(System.currentTimeMillis() - 6 * 86400000L) to 150f,
+        Date(System.currentTimeMillis() - 5 * 86400000L) to 145f,
+        Date(System.currentTimeMillis() - 4 * 86400000L) to 160f,
+        Date(System.currentTimeMillis() - 3 * 86400000L) to 170f,
+        Date(System.currentTimeMillis() - 2 * 86400000L) to 190f,
+        Date(System.currentTimeMillis() - 86400000L) to 185f,
+        Date() to 180f
+    )
+
+val emmaPatient = Patient(
+        id = "LT997654321",
+        name = "Emma Johnson",
+        age = 45,
+        gender = "Female",
+        bloodPressure = "190/120",
+        lastVisit = "April 26, 2024",
+        condition = "Hypertensive Crisis"
+    )
+
+val dummyLabTests = listOf(
+    LabTest(
+        name = "Complete Blood Count",
+        date = "Apr 20, 2024",
+        results = mapOf(
+            "WBC" to "6.5 (Normal)",
+            "RBC" to "4.2 (Normal)",
+            "Hemoglobin" to "12.8 (Low)"
+        )
+    ),
+    LabTest(
+        name = "Lipid Panel",
+        date = "Apr 15, 2024",
+        results = mapOf(
+            "Cholesterol" to "210 (High)",
+            "Triglycerides" to "150 (Borderline)"
+        )
+    )
+)
+
+val dummyPrescriptions = listOf(
+    Prescription(
+        medication = "Lisinopril 10mg",
+        dosage = "Once daily",
+        duration = "30 days",
+        notes = "For blood pressure control"
+    ),
+    Prescription(
+        medication = "Metformin 500mg",
+        dosage = "Twice daily",
+        duration = "90 days",
+        notes = "With meals"
+    )
+)
+
+val dummyMessages = listOf(
+    Message("1", "I've been having headaches", true, "10:30 AM"),
+    Message("2", "Any fever or dizziness?", false, "10:32 AM"),
+    Message("3", "No fever but some dizziness", true, "10:35 AM")
 )

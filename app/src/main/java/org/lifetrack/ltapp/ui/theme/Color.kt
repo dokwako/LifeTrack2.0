@@ -28,6 +28,11 @@ val HighAlert = Color(0xFFFFA000)
 val MediumAlert = Color(0xFFFFC107)
 val LowAlert = Color(0xFF388E3C)
 
+val HospitalBlue = Color(0xFF0077B6)
+val EmergencyRed = Color(0xFFE53935)
+val SuccessGreen = Color(0xFF4CAF50)
+val WarningYellow = Color(0xFFFFC107)
+
 
 val LightColors = lightColorScheme(
     primary = Color(0xFF4CAF50), // Green

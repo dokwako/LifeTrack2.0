@@ -95,6 +95,10 @@ dependencies {
     implementation(libs.koin.androidx.compose)
     implementation(libs.koin.androidx.compose.navigation)
 
+    implementation(libs.charts)
+    implementation(libs.mpandroidchart)
+//    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
 
     testImplementation(libs.junit)
     debugImplementation(libs.androidx.ui.tooling)

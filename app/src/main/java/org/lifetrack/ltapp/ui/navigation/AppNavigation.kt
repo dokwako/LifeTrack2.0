@@ -15,8 +15,6 @@ fun AppNavigation(
 //    scope: CoroutineScope,
 ) {
     val navController = rememberNavController()
-//    val context = LocalContext.current
-//    val authRepository = koinInject<AuthRepository>()
     val authPresenter = koinViewModel<AuthPresenter>()
 
     NavHost(
@@ -27,7 +25,9 @@ fun AppNavigation(
             SplashScreen(navController)
         }
         composable("login") {
-            LoginScreen(navController, authPresenter)
+            LoginScreen(
+                navController = navController,
+                presenter = authPresenter)
         }
         composable("signup") {
             RegistrationScreen(
@@ -36,9 +36,7 @@ fun AppNavigation(
             )
         }
         composable("home") {
-            HomeScreen(
-                navController = navController
-            )
+            HomeScreen(navController = navController)
         }
         composable("alma"){
             ChatScreen(
@@ -46,29 +44,29 @@ fun AppNavigation(
                 presenter = koinViewModel<AlmaPresenter>())
         }
         composable("profile"){
-            ProfileScreen(
-                navController = navController,
-            )
+            ProfileScreen(navController = navController)
         }
         composable("menu"){
-            MenuScreen(
-                navController = navController
-            )
+            MenuScreen(navController = navController)
         }
         composable("restore") {
-            RestoreScreen(
-                navController = navController
-            )
+            RestoreScreen(navController = navController)
         }
-//        composable ("kiongozi"){
-//            AdminScreen(navController)
-//        }
-//        composable("expert") { ExpertScreen(navController) }
-        composable("timeline") { TimeLineScreen(navController) }
-        composable("telemedicine") { TelemedicineScreen(navController) }
-        composable("alerts") { AlertScreen(navController) }
-//        composable("info_hub") { InfoHubScreen(navController) }
-        composable("other") { OtherScreen(navController) }
+        composable("analytics") {
+            AnalyticScreen(navController = navController)
+        }
+        composable("timeline") {
+            TimeLineScreen(navController = navController)
+        }
+        composable("telemedicine") {
+            TelemedicineScreen(navController)
+        }
+        composable("alerts") {
+            AlertScreen(navController)
+        }
+        composable("other") {
+            OtherScreen(navController)
+        }
         composable("support") {
              SupportScreen(
                  navController = navController,

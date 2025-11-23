@@ -22,6 +22,8 @@ ui-viewbinding = "1.9.4"
 kotlinx-datetime = "0.7.1"
 ktor = "3.3.2"
 koin-bom = "3.5.6"
+mpchart = "3.1.0"
+charts = "2.0.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -64,6 +66,8 @@ koin-android = { module = "io.insert-koin:koin-android" }
 koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose" }
 koin-androidx-compose-navigation = { module = "io.insert-koin:koin-androidx-compose-navigation" }
 
+charts = {module = "io.github.dautovicharis:charts-android", version.ref = "charts"}
+mpandroidchart = { module = "com.github.PhilJay:MPAndroidChart", version.ref = "mpchart" }
 
 
 [plugins]
