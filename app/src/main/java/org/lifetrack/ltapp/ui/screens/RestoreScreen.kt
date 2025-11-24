@@ -1,6 +1,5 @@
 package org.lifetrack.ltapp.ui.screens
 
-//import com.example.lifetrack.model.repository.UserRepositoryImpl
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowCircleLeft
@@ -15,8 +14,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import kotlinx.coroutines.launch
-
-//import org.lifetrack.ltapp.model.data.dto.AuthResult
 
 @Composable
 fun RestoreScreen(
