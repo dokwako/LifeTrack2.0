@@ -21,7 +21,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
-//import org.lifetrack.ltapp.model.repository.AuthRepositoryImpl
 import org.lifetrack.ltapp.presenter.AuthPresenter
 import org.lifetrack.ltapp.ui.state.UIState
 import org.lifetrack.ltapp.ui.components.loginscreen.LTBrandAppBar
@@ -36,54 +35,6 @@ fun LoginScreen(navController: NavController, presenter: AuthPresenter) {
     var password by remember { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
     var uiState by remember { mutableStateOf<UIState>(UIState.Idle) }
-
-//    LaunchedEffect(presenter) {
-//        presenter.view = object : AuthView {
-//            override fun showLoading(isLoading: Boolean, msg: String?) {
-//                uiState = if (isLoading) UIState.Loading else UIState.Idle
-//            }
-//
-//            override fun showError(msg: String) {
-//                coroutineScope.launch {
-//                    snackbarHostState.showSnackbar(msg)
-//                }
-//            }
-//
-//            override fun onAuthSuccess() {
-//                uiState = UIState.Success
-//            }
-//
-//            override fun onAuthSuccessWithData(data: String) {
-//                userRole.value = data
-////                presenter.
-////                coroutineScope.launch {
-////                    when(data){
-////                        "Kiongos" -> {
-////                            navController.navigate("kiongozi") {
-////                                popUpTo("login") { inclusive = true }
-////                            }
-////                        }
-////                        "Patients" -> {
-////                            navController.navigate("home") {
-////                                popUpTo("login") { inclusive = true }
-////                            }
-////                        }
-////                        "Practitioners" -> {
-////                            navController.navigate("expert") {
-////                                popUpTo("login") { inclusive = true }
-////                            }
-////                        }
-////                        else -> {
-////                            snackbarHostState.showSnackbar("Unknown role: $data")
-////                        }
-////                    }
-////                }
-//                coroutineScope.launch {
-//                    snackbarHostState.showSnackbar("Logging you in...")
-//                }
-//            }
-//        }
-//    }
 
     Scaffold(
         snackbarHost = {
@@ -178,7 +129,7 @@ fun LoginScreen(navController: NavController, presenter: AuthPresenter) {
                     }
                 }
 //                Spacer(modifier = Modifier.height(24.dp))
-                TextButton(onClick = { navController.navigate("reset") }) {
+                TextButton(onClick = { navController.navigate("restore") }) {
                     Text(
                         text = "Forgot Password?",
                         style = MaterialTheme.typography.bodyMedium,

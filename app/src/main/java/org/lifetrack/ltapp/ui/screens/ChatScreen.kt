@@ -33,7 +33,7 @@ fun ChatScreen(
     presenter: AlmaPresenter
 ) {
     val userInput = presenter.userInput
-    val messages = presenter.allChats.collectAsState().value
+    val messages = presenter.chats
     val isLoading = presenter.isLoading
 
     Scaffold(
