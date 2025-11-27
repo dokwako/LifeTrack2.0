@@ -22,7 +22,6 @@ fun ChatBubble(message: AlmaMessage) {
     val textColor = if (message.isUser) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurface
     val shape = if (message.isUser) RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp, bottomStart = 16.dp, bottomEnd = 4.dp) else
             RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp, bottomStart = 4.dp, bottomEnd = 16.dp)
-//    val formattedTime = formatTimestamp()
     Row(
         modifier = Modifier
             .fillMaxWidth()

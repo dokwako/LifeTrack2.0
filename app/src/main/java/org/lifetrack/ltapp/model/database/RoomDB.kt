@@ -5,9 +5,9 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import org.lifetrack.ltapp.model.data.dao.ChatDao
-import org.lifetrack.ltapp.model.data.dclass.MessageT
+import org.lifetrack.ltapp.model.data.dclass.MessageEntity
 
-@Database(entities = [MessageT::class], version = 1, exportSchema = false)
+@Database(entities = [MessageEntity::class], version = 1, exportSchema = false)
 abstract class LTRoomDatabase: RoomDatabase(){
     abstract fun chatDao(): ChatDao
 

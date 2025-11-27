@@ -14,7 +14,7 @@ object KtorHttpClient {
                 json(Json {
                     prettyPrint = true
                     isLenient = true
-                    }
+                }
                 )
             }
         }

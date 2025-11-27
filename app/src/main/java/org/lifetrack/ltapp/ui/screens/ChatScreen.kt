@@ -2,7 +2,6 @@ package org.lifetrack.ltapp.ui.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
@@ -30,7 +29,7 @@ fun ChatScreen(
 
     LaunchedEffect(chatMessages.size) {
         scope.launch {
-            listState.animateScrollToItem(chatMessages.size)
+            listState.animateScrollToItem(chatMessages.size - 1)
         }
     }
 

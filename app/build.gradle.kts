@@ -83,6 +83,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling)
     implementation(libs.androidx.ui.tooling.preview)
+    implementation("io.ktor:ktor-client-cio-jvm:3.3.2")
     testImplementation(libs.androidx.ui.test.junit4)
     implementation(libs.androidx.ui.viewbinding)
     implementation(libs.kotlinx.serialization.json)
