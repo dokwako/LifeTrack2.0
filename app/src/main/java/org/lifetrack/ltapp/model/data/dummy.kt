@@ -192,14 +192,14 @@ val dPrescriptions = mutableListOf(
     )
 )
 
-val dummyMessages = mutableListOf(
-    Message( "I've been having headaches", true, "10:30 AM"),
-    Message( "Any fever or dizziness?", false, "10:32 AM"),
-    Message("No fever but some dizziness", true, "10:35 AM"),
-    Message( "Since when have you been feeling like that", false, "10:36 AM"),
-    Message( "Come see me at my place of work at 2:00 PM", false,"10:36 AM"),
-    Message( "Okay, i'll be there on time", true,"10:39 AM")
-)
+//val dummyMessages = mutableListOf(
+//    Message( "I've been having headaches", true, "10:30 AM"),
+//    Message( "Any fever or dizziness?", false, "10:32 AM"),
+//    Message("No fever but some dizziness", true, "10:35 AM"),
+//    Message( "Since when have you been feeling like that", false, "10:36 AM"),
+//    Message( "Come see me at my place of work at 2:00 PM", false,"10:36 AM"),
+//    Message( "Okay, i'll be there on time", true,"10:39 AM")
+//)
 
 val dummyDoctors = listOf(
     DoctorProfile(

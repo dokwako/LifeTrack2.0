@@ -6,15 +6,12 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.WhileSubscribed
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import org.lifetrack.ltapp.model.data.dummyMessages
 import org.lifetrack.ltapp.model.data.dto.Message
 import org.lifetrack.ltapp.model.repository.ChatRepository
-import java.time.LocalTime
-import java.time.format.DateTimeFormatter
+import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
 
 
 class ChatPresenter(
@@ -22,16 +19,7 @@ class ChatPresenter(
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-//    private val _messages = MutableStateFlow<List<Message>>(emptyList())
-//    val messages = _messages.asStateFlow()
-
-//    init {
-//        val savedStateHandleChats = savedStateHandle.get<List<Message>>("myChats")
-//        myChats.value.ifEmpty { this.myChats.value.toMutableList().addAll(savedStateHandleChats) }
-//    }
-
     val chatInput = MutableStateFlow("")
-
     val myChats: StateFlow<List<Message>> =
         chatRepository.chatsFlow.stateIn(
             viewModelScope,
@@ -43,11 +31,13 @@ class ChatPresenter(
         chatInput.value= value
     }
 
+    @OptIn(ExperimentalUuidApi::class)
     fun sendUserMessage() {
         if(chatInput.value.isBlank()) return
         viewModelScope.launch {
             chatRepository.addChat(
                 Message(
+                    id = Uuid.random().toHexString(),
                     text = chatInput.value,
                     isFromPatient = true,
 //                    timestamp = now()
@@ -55,6 +45,7 @@ class ChatPresenter(
             )
         }
         chatInput.value = ""
+
     }
 
     override fun onCleared() {

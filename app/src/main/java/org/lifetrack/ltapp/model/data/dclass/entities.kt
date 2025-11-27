@@ -4,10 +4,9 @@ import androidx.room.PrimaryKey
 import androidx.room.Entity
 
 @Entity(tableName = "demChats")
-data class Message(
+data class MessageT(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val text: String,
     val isUser: Boolean,
-    val timeStamp: String
-//    val timestamp: Long = System.currentTimeMillis()
+    val timestamp: Long = System.currentTimeMillis()
 )
