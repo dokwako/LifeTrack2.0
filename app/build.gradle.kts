@@ -80,8 +80,12 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.material3.lint)
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.ui.tooling)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.ui.viewbinding)
     implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.work.runtime.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
@@ -97,12 +101,6 @@ dependencies {
     implementation(libs.navigation.compose)
 
     implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling)
-    implementation(libs.androidx.ui.tooling.preview)
-    testImplementation(libs.androidx.ui.test.junit4)
-    implementation(libs.androidx.ui.viewbinding)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.kotlinx.datetime)
 
@@ -119,11 +117,10 @@ dependencies {
     implementation(libs.koin.androidx.compose.navigation)
 
     implementation(libs.charts)
-    implementation(libs.mpandroidchart)
-
     implementation(libs.room.ktx)
     implementation(libs.room.runtime)
     implementation(libs.room.compiler)
+    implementation(libs.mpandroidchart)
 
 //    implementation(libs.accompanist.pager)
 //    implementation(libs.accompanist.pager.indicators)
@@ -131,6 +128,7 @@ dependencies {
     implementation(libs.accompanist.navigation.animation)
 
     testImplementation(libs.junit)
+    testImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     androidTestImplementation(libs.androidx.junit)

@@ -1,40 +1,54 @@
 package org.lifetrack.ltapp.ui.screens
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
-import androidx.compose.material3.*
+import androidx.compose.material.icons.filled.ArrowCircleLeft
+import androidx.compose.material.icons.filled.ChevronRight
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
-import org.lifetrack.ltapp.model.data.dclass.MenuItemData
+import org.lifetrack.ltapp.presenter.UserPresenter
 import org.lifetrack.ltapp.ui.components.menuscreen.MenuListItem
-import org.lifetrack.ltapp.ui.theme.LTAppTheme
+import org.lifetrack.ltapp.ui.components.menuscreen.ToggleMenuListItem
+import org.lifetrack.ltapp.ui.theme.Purple40
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MenuScreen(navController: NavController) {
-    val userName by remember { mutableStateOf("Dr. Najma") }
-    val userEmail by remember { mutableStateOf( "najma@lifetrack.org") }
-    val initials = userName.split(" ").map { it.first() }.joinToString("")
+fun MenuScreen(
+    navController: NavController,
+    presenter: UserPresenter
+    ) {
+    val userName = presenter.userName
+    val userEmail = presenter.userEmail
+    val initials = presenter.userInitials
 
     Scaffold(
         topBar = {
@@ -111,64 +125,49 @@ fun MenuScreen(navController: NavController) {
                         tint = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
-
-            }
-
-            items(getMenuItems()) { item ->
-                MenuListItem(
-                    icon = item.icon,
-                    title = item.title,
-                    onClick = {
-                        navController.navigate(item.route) {
-                            launchSingleTop = true
-                        }
-                    }
-                )
             }
 
             item {
-                Spacer(modifier = Modifier.height(24.dp))
+                ToggleMenuListItem(
+                    color = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.primary else Purple40,
+                    toggleItem = presenter.notificationItemData,
+                    onToggle = {
+                        presenter::onUserNotificationsUpdate
+                    },
+                    toggleState = presenter.notificationToggleState
+                )
+            }
 
-                Row (
-                    verticalAlignment = Alignment.Bottom,
-                    horizontalArrangement = Arrangement.Center,
-                    modifier = Modifier
-                        .fillMaxWidth()
-
-                ) {
-                    Text(
-                        text = "Version 1.0.0",
-                        fontWeight = FontWeight.ExtraBold,
-                        style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = 16.dp),
-                        textAlign = TextAlign.Center
-                    )
-                }
+            items(presenter.menuItems) { item ->
+                MenuListItem(
+                    onClick = {
+                        presenter.onMenuItemAction(
+                            navController = navController,
+                            route = item.route,
+                        )
+                    },
+                    color = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.primary else Purple40,
+                    menuItemData = item,
+                )
             }
         }
-    }
-}
-
-
-private fun getMenuItems() = listOf(
-    MenuItemData("Health Records", Icons.Filled.MedicalServices, "medical_timeline"),
-    MenuItemData("Medications", Icons.Filled.Medication, "additional_features"),
-    MenuItemData("Appointments", Icons.Filled.CalendarToday, "telemedicine"),
-    MenuItemData("Tele-Medicine", Icons.Filled.VideoCall, "telemedicine"),
-    MenuItemData("Emergency Contacts", Icons.Filled.Emergency, "epidemic_alert"),
-//    MenuItemData("Help & Support", Icons.AutoMirrored.Filled.Help, "support"),
-    MenuItemData("About LifeTrack", Icons.Filled.Info, "about")
-)
-
-@RequiresApi(Build.VERSION_CODES.S)
-@Preview
-@Composable
-fun PreviewMenuScreen(){
-    val navController = rememberNavController()
-    LTAppTheme {
-        MenuScreen(navController)
+//        Row (
+//            verticalAlignment = Alignment.Bottom,
+//            horizontalArrangement = Arrangement.Center,
+//            modifier = Modifier
+//                .fillMaxWidth()
+//
+//        ) {
+//            Text(
+//                text = "Version 1.0.0",
+//                fontWeight = FontWeight.ExtraBold,
+//                style = MaterialTheme.typography.labelSmall,
+//                color = MaterialTheme.colorScheme.onSurfaceVariant,
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .padding(top = 16.dp),
+//                textAlign = TextAlign.Center
+//            )
+//        }
     }
 }

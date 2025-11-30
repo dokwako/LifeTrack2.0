@@ -14,39 +14,41 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.lifetrack.ltapp.ui.components.homescreen.HealthSummaryCard
 import kotlin.math.absoluteValue
 import org.lifetrack.ltapp.ui.components.homescreen.TodayScheduleCard
 
+
 @Composable
 fun LtHomeCarousel(
-    //autoRotate: Boolean = true,
-//    rotationInterval: Long = 5000L
+    autoRotate: Boolean,
+    itemsCount: Int,
+    rotationInterval: Long = 5000L
 ) {
-    val pageCount = 2
     val pagerState = rememberPagerState(
         initialPage = 0,
         initialPageOffsetFraction = 0f,
-        pageCount = { 2 }
+        pageCount = { itemsCount }
     )
-//    val scope = rememberCoroutineScope()
-    /*
+    val scope = rememberCoroutineScope()
     if (autoRotate) {
         LaunchedEffect(Unit) {
             while (true) {
                 delay(rotationInterval)
                 scope.launch {
-                    val nextPage = (pagerState.currentPage + 1) % pageCount
+                    val nextPage = (pagerState.currentPage + 1) % itemsCount
                     pagerState.animateScrollToPage(nextPage)
                 }
             }
         }
     }
-    */
 
     Column(
         modifier = Modifier
             .fillMaxWidth()
+//            .height(200.dp)
             .background(
                 MaterialTheme.colorScheme.background
             ),
@@ -84,8 +86,8 @@ fun LtHomeCarousel(
                 }
             }
         }
-        Spacer(Modifier.height(16.dp))
-        LtCarouselIndicator(pagerState, pageCount)
+        Spacer(Modifier.height(12.dp))
+        LtCarouselIndicator(pagerState, itemsCount)
     }
 }
 

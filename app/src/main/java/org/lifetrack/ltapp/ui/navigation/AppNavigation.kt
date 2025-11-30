@@ -9,7 +9,9 @@ import org.lifetrack.ltapp.presenter.AlmaPresenter
 import org.lifetrack.ltapp.presenter.AnalyticPresenter
 import org.lifetrack.ltapp.presenter.AuthPresenter
 import org.lifetrack.ltapp.presenter.ChatPresenter
+import org.lifetrack.ltapp.presenter.HomePresenter
 import org.lifetrack.ltapp.presenter.SupportPresenter
+import org.lifetrack.ltapp.presenter.UserPresenter
 import org.lifetrack.ltapp.ui.screens.*
 
 @Composable
@@ -19,7 +21,7 @@ fun AppNavigation(navController: NavHostController) {
 
     NavHost(
         navController = navController,
-        startDestination = "home" // usisahau to revert to splash
+        startDestination = "home"
     ) {
 
         composable("splash") {
@@ -41,7 +43,10 @@ fun AppNavigation(navController: NavHostController) {
         }
 
         composable("home") {
-            HomeScreen(navController = navController)
+            HomeScreen(
+                navController = navController,
+                presenter = koinViewModel<HomePresenter>()
+            )
         }
 
         composable("alma") { backStackEntry ->
@@ -62,7 +67,10 @@ fun AppNavigation(navController: NavHostController) {
         }
 
         composable("menu") {
-            MenuScreen(navController = navController)
+            MenuScreen(
+                navController = navController,
+                presenter = koinViewModel<UserPresenter>()
+            )
         }
 
         composable("ltChats"){

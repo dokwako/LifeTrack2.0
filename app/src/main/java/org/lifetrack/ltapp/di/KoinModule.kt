@@ -15,7 +15,9 @@ import org.lifetrack.ltapp.presenter.AlmaPresenter
 import org.lifetrack.ltapp.presenter.AnalyticPresenter
 import org.lifetrack.ltapp.presenter.AuthPresenter
 import org.lifetrack.ltapp.presenter.ChatPresenter
+import org.lifetrack.ltapp.presenter.HomePresenter
 import org.lifetrack.ltapp.presenter.SupportPresenter
+import org.lifetrack.ltapp.presenter.UserPresenter
 
 val koinModule = module {
     single<AuthRepository> {
@@ -40,7 +42,8 @@ val koinModule = module {
     viewModelOf(::AlmaPresenter)
     viewModelOf(::AuthPresenter)
     viewModelOf(::SupportPresenter)
-//    viewModelOf(::ChatPresenter)
+    viewModelOf(::HomePresenter)
+    viewModelOf(::UserPresenter)
     viewModelOf(::AnalyticPresenter)
     viewModel {
         (savedStateHandle: SavedStateHandle) ->

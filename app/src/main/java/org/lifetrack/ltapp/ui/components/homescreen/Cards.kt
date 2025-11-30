@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -116,8 +115,7 @@ fun GlassActionCard(title: String, icon: ImageVector, onClick: () -> Unit) {
 }
 
 @Composable
-fun TodayScheduleCard()
-{
+fun TodayScheduleCard(){
     GlassCard(
         shape = RoundedCornerShape(22.dp),
         modifier = Modifier
@@ -139,7 +137,7 @@ fun TodayScheduleCard()
                     style = MaterialTheme.typography.titleMedium,
                     color = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.primary else Purple40
                 )
-                Spacer(Modifier.height(8.dp))
+                Spacer(Modifier.height(16.dp))
                 Row(
                     Modifier
                 ) {
@@ -155,7 +153,6 @@ fun TodayScheduleCard()
 
                 Text(
                     text = "Appointments",
-//                    fontSize = 64.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.primary else Purple40
                 )
@@ -208,8 +205,10 @@ fun HealthSummaryCard (
         Column(Modifier.padding(16.dp)) {
             Text(
                 "Health Summary",
-                style = MaterialTheme.typography.titleLarge,
-                color = MaterialTheme.colorScheme.primary
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 24.sp,
+                style = MaterialTheme.typography.titleMedium,
+                color = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.primary else Purple40
             )
 
             Spacer(Modifier.height(32.dp))
@@ -223,11 +222,13 @@ fun HealthSummaryCard (
                     bloodPressure,
                     Icons.Default.MonitorHeart
                 )
+                Spacer(Modifier.width(10.dp))
                 HealthMetric(
                     "BPM",
                     heartRate,
                     Icons.Default.Favorite
                 )
+                Spacer(Modifier.width(10.dp))
                 HealthMetric(
                     "Temp",
                     temperature,

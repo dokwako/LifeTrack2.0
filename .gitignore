@@ -15,6 +15,7 @@
 local.properties
 .idea
 build/
+build-cache
 *.db
 *.db-shm
 *.db-wal
