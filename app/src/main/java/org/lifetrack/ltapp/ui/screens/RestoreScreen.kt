@@ -1,6 +1,7 @@
 package org.lifetrack.ltapp.ui.screens
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowCircleLeft
 import androidx.compose.material3.*
@@ -14,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import kotlinx.coroutines.launch
+import org.lifetrack.ltapp.ui.components.homescreen.LifeTrackTopBar
 
 @Composable
 fun RestoreScreen(
@@ -24,11 +26,20 @@ fun RestoreScreen(
     var isLoading by remember { mutableStateOf(false) }
     var errorMessage by remember { mutableStateOf<String?>(null) }
     var resetSuccess by remember { mutableStateOf(false) }
-    val snackbarHostState = remember { SnackbarHostState() }
+    val snackBarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
 
     Scaffold(
-        snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
+        topBar = {
+            LifeTrackTopBar(
+                "",
+                navigationIcon = Icons.Default.ArrowCircleLeft,
+                backCallback = { navController.popBackStack() }
+            ) {
+
+            }
+        },
+        snackbarHost = { SnackbarHost(hostState = snackBarHostState) }
     ) { paddingValues ->
         Box(
             modifier = Modifier
@@ -115,24 +126,15 @@ fun RestoreScreen(
             }
 
         }
-        Column(
-            modifier = Modifier
-                .fillMaxWidth(),
-//                .padding(16.dp),
-            verticalArrangement = Arrangement.Top,
-            horizontalAlignment = Alignment.Start
-        ) {
-            TextButton(onClick = { navController.popBackStack() }
-            ) {
-                Icon(
-                    imageVector = Icons.Default.ArrowCircleLeft,
-                    contentDescription = "Go Back",
-                    modifier = Modifier
-                        .size(42.dp)
-                        
-                )
-            }
-        }
+//        Column(
+//            modifier = Modifier
+//                .fillMaxWidth(),
+////                .padding(16.dp),
+//            verticalArrangement = Arrangement.Top,
+//            horizontalAlignment = Alignment.Start
+//        ) {
+//
+//        }
 
     }
 }

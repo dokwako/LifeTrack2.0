@@ -17,8 +17,6 @@ data class MenuItemData(
 data class ToggleItemData(
     val title: String,
     var icon: ImageVector,
-//    val route: String,
-//    var toggleState: Boolean,
 )
 
 val menuListItems: Collection<MenuItemData> = mutableListOf(

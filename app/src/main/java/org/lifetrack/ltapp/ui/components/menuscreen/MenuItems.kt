@@ -79,13 +79,13 @@ fun ToggleMenuListItem(
             containerColor = MaterialTheme.colorScheme.surface,
             contentColor = color
         ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+//        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         shape = RoundedCornerShape(12.dp)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp)
+                .padding(6.dp)
                 .clickable(
                     onClick = onToggle
                 ),
@@ -108,7 +108,7 @@ fun ToggleMenuListItem(
                     imageVector = if (toggleState) Icons.Default.ToggleOn else Icons.Default.ToggleOff,
                     contentDescription = "Toggle",
                     tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.size(25.dp),
+                    modifier = Modifier.size(32.dp),
                 )
             }
         }
