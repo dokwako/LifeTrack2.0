@@ -2,12 +2,14 @@ package org.lifetrack.ltapp.ui.components.homescreen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -16,7 +18,10 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.MonitorHeart
 import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.Thermostat
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -37,6 +42,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.lifetrack.ltapp.ui.theme.Purple40
 import org.lifetrack.ltapp.ui.theme.Purple80
+
 
 @Composable
 fun GlassCard(shape: Shape, modifier: Modifier = Modifier, content: @Composable ColumnScope.() -> Unit) {
@@ -110,19 +116,22 @@ fun GlassActionCard(title: String, icon: ImageVector, onClick: () -> Unit) {
 }
 
 @Composable
-fun TodayScheduleCard() {
-    _root_ide_package_.org.lifetrack.ltapp.ui.components.homescreen.GlassCard(
+fun TodayScheduleCard()
+{
+    GlassCard(
         shape = RoundedCornerShape(22.dp),
-        modifier = Modifier.fillMaxWidth()
-    ) {
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight()
+) {
         Row(
             modifier = Modifier
-                .padding(20.dp)
+                .padding(10.dp)
                 .fillMaxWidth()
 //            .background(color = MaterialTheme.colorScheme.surfaceVariant)
 //            .pulsate()
         ) {
-            Column(modifier = Modifier.padding(20.dp)) {
+            Column(modifier = Modifier.padding(10.dp)) {
                 Text(
                     "Today's Schedule",
                     fontWeight = FontWeight.SemiBold,
@@ -152,8 +161,6 @@ fun TodayScheduleCard() {
                 )
 
             }
-
-
             Column(
                 modifier = Modifier
                     .padding(top = 60.dp)
@@ -180,6 +187,51 @@ fun TodayScheduleCard() {
                     "Upcoming",
                     fontWeight = FontWeight.SemiBold,
                     color = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.primary else Purple40
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun HealthSummaryCard (
+    bloodPressure: String ="120/80",
+    heartRate: String = "78 bpm",
+    temperature: String ="98.6 F"
+) {
+    GlassCard(
+        shape = RoundedCornerShape(22.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight()
+    ){
+        Column(Modifier.padding(16.dp)) {
+            Text(
+                "Health Summary",
+                style = MaterialTheme.typography.titleLarge,
+                color = MaterialTheme.colorScheme.primary
+            )
+
+            Spacer(Modifier.height(32.dp))
+
+            Row(
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                HealthMetric(
+                    "BP",
+                    bloodPressure,
+                    Icons.Default.MonitorHeart
+                )
+                HealthMetric(
+                    "BPM",
+                    heartRate,
+                    Icons.Default.Favorite
+                )
+                HealthMetric(
+                    "Temp",
+                    temperature,
+                    Icons.Default.Thermostat
                 )
             }
         }

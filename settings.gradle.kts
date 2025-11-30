@@ -22,3 +22,12 @@ dependencyResolutionManagement {
 
 rootProject.name = "LTApp"
 include(":app")
+
+
+buildCache {
+    local {
+        isEnabled = true
+        directory = File(rootDir, "build-cache")
+
+    }
+}

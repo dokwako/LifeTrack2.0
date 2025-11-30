@@ -13,6 +13,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import org.lifetrack.ltapp.ui.components.carousels.LtHomeCarousel
 import org.lifetrack.ltapp.ui.components.homescreen.*
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -38,7 +39,7 @@ fun HomeScreen(navController: NavController) {
             Spacer(Modifier.height(8.dp))
             AppTopBar(navController)
             Spacer(Modifier.height(18.dp))
-            TodayScheduleCard()
+            LtHomeCarousel()
             Spacer(Modifier.height(18.dp))
             FeatureGrid(navController)
         }

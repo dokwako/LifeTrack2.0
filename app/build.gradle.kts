@@ -41,6 +41,13 @@ android {
     }
     kotlin {
         compilerOptions {
+            freeCompilerArgs.addAll(
+                listOf(
+                    "-P", "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=${project.rootDir}/compose-metrics",
+                    "-P", "plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=${project.rootDir}/compose-reports",
+//                    "-Xbuild-cache"
+                )
+            )
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
@@ -56,13 +63,31 @@ android {
     ndkVersion = "29.0.13599879 rc2"
 }
 
+configurations.all {
+    resolutionStrategy {
+        force("org.jetbrains:annotations:23.0.0")
+        eachDependency {
+            if (requested.group == "com.intellij" && requested.name == "annotations") {
+                useTarget("org.jetbrains:annotations:23.0.0")
+            }
+        }
+    }
+}
+
 dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-    implementation(libs.material)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.material3.lint)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.work.runtime.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+
+    implementation(libs.material)
     implementation(libs.material.icons.core)
     implementation(libs.material.icons.extended)
 
@@ -71,19 +96,11 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.navigation.compose)
 
-    implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    implementation(libs.androidx.lifecycle.livedata.ktx)
-    implementation(libs.androidx.work.runtime.ktx)
-
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling)
     implementation(libs.androidx.ui.tooling.preview)
-    implementation("io.ktor:ktor-client-cio-jvm:3.3.2")
     testImplementation(libs.androidx.ui.test.junit4)
     implementation(libs.androidx.ui.viewbinding)
     implementation(libs.kotlinx.serialization.json)
@@ -107,6 +124,11 @@ dependencies {
     implementation(libs.room.ktx)
     implementation(libs.room.runtime)
     implementation(libs.room.compiler)
+
+//    implementation(libs.accompanist.pager)
+//    implementation(libs.accompanist.pager.indicators)
+    implementation(libs.accompanist.systemuicontroller)
+    implementation(libs.accompanist.navigation.animation)
 
     testImplementation(libs.junit)
     debugImplementation(libs.androidx.ui.tooling)
