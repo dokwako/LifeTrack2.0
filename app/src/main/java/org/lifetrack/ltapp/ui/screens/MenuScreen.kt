@@ -19,6 +19,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowCircleLeft
 import androidx.compose.material.icons.filled.ChevronRight
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -35,6 +37,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import org.lifetrack.ltapp.model.data.dclass.ToggleItemData
 import org.lifetrack.ltapp.presenter.UserPresenter
 import org.lifetrack.ltapp.ui.components.menuscreen.MenuListItem
 import org.lifetrack.ltapp.ui.components.menuscreen.ToggleMenuListItem
@@ -130,14 +133,23 @@ fun MenuScreen(
             item {
                 ToggleMenuListItem(
                     color = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.primary else Purple40,
-                    toggleItem = presenter.notificationItemData,
+                    toggleItem = ToggleItemData("App Notifications", Icons.Default.Notifications),
                     onToggle = {
-                        presenter::onUserNotificationsUpdate
+                        presenter.onUserNotificationsUpdate()
                     },
-                    toggleState = presenter.notificationToggleState
+                    toggleState = presenter.appNotificationToggleState
                 )
             }
-
+            item {
+                ToggleMenuListItem(
+                    color = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.primary else Purple40,
+                    toggleItem = ToggleItemData("Email Notifications", Icons.Default.Email),
+                    onToggle = {
+                        presenter.onEmailNotificationsUpdate()
+                    },
+                    toggleState = presenter.emailNotificationToggleState
+                )
+            }
             items(presenter.menuItems) { item ->
                 MenuListItem(
                     onClick = {

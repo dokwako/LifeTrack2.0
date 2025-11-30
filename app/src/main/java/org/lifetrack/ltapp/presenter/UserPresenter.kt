@@ -7,8 +7,9 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import org.lifetrack.ltapp.model.data.dclass.MenuItemData
+import org.lifetrack.ltapp.model.data.dclass.ToggleItemData
 import org.lifetrack.ltapp.model.data.dclass.menuListItems
-import org.lifetrack.ltapp.model.data.dclass.notificationListItemData
+
 
 class UserPresenter: ViewModel() {
 
@@ -18,11 +19,12 @@ class UserPresenter: ViewModel() {
         private set
     var userInitials = userName.split(" ").map { it.first() }.joinToString("")
         private set
-    var notificationItemData by mutableStateOf(notificationListItemData)
-        private set
-    var notificationToggleState by mutableStateOf(false)
-        private set
     val menuItems = mutableStateListOf<MenuItemData>()
+
+    var appNotificationToggleState by mutableStateOf(false)
+        private set
+    var emailNotificationToggleState by mutableStateOf(false)
+        private set
 
     init {
         menuItems.addAll(menuListItems)
@@ -33,9 +35,11 @@ class UserPresenter: ViewModel() {
             launchSingleTop = true
         }
     }
-
     fun onUserNotificationsUpdate(){
-        notificationToggleState != notificationToggleState
-        println("***********************:: $notificationToggleState  ::*************************\n ${notificationItemData.toString()}")
+        appNotificationToggleState = !appNotificationToggleState
+    }
+
+    fun onEmailNotificationsUpdate(){
+        emailNotificationToggleState = !emailNotificationToggleState
     }
 }
