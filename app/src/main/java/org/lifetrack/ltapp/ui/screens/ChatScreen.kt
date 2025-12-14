@@ -131,7 +131,8 @@ fun ChatScreen(
                 .fillMaxSize(),
             state = listState,
             verticalArrangement = Arrangement.spacedBy(12.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
+            reverseLayout = true
         ) {
             itemsIndexed(
                 items = chatMessages,
