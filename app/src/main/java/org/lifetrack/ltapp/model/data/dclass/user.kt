@@ -77,3 +77,10 @@ data class Premium(
     val icon: @Composable () -> Unit,
     val accentColor: Color
 )
+
+data class ProfileInfo(
+    val userName: String = "",
+    val userEmail: String = "",
+    val userInitials: String = "",
+    val userPhoneNumber: String = ""
+)

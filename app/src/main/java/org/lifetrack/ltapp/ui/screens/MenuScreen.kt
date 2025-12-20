@@ -30,6 +30,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -49,9 +50,7 @@ fun MenuScreen(
     navController: NavController,
     presenter: UserPresenter
     ) {
-    val userName = presenter.userName
-    val userEmail = presenter.userEmail
-    val initials = presenter.userInitials
+    val userProfileInfo = presenter.profileInfo.collectAsState()
 
     Scaffold(
         topBar = {
@@ -102,7 +101,7 @@ fun MenuScreen(
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = initials,
+                            text = userProfileInfo.value.userInitials,
                             style = MaterialTheme.typography.headlineMedium,
                             color = MaterialTheme.colorScheme.onPrimaryContainer
                         )
@@ -110,11 +109,11 @@ fun MenuScreen(
 
                     Column {
                         Text(
-                            text = userName,
+                            text = userProfileInfo.value.userName,
                             style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
                         )
                         Text(
-                            text = userEmail,
+                            text = userProfileInfo.value.userEmail,
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )

@@ -19,10 +19,11 @@ fun AppNavigation(navController: NavHostController) {
     val authPresenter = koinViewModel<AuthPresenter>()
     val analyticPresenter = koinViewModel<AnalyticPresenter>()
     val chatPresenter = koinViewModel<ChatPresenter>()
+    val userPresenter = koinViewModel<UserPresenter>()
 
     NavHost(
         navController = navController,
-        startDestination = "home"
+        startDestination = "menu"
     ) {
 
         composable("splash") {
@@ -60,14 +61,15 @@ fun AppNavigation(navController: NavHostController) {
         composable("profile") {
             ProfileScreen(
                 navController = navController,
-                presenter = koinViewModel<AuthPresenter>()
+                authPresenter = authPresenter,
+                userPresenter = userPresenter
             )
         }
 
         composable("menu") {
             MenuScreen(
                 navController = navController,
-                presenter = koinViewModel<UserPresenter>()
+                presenter = userPresenter
             )
         }
 

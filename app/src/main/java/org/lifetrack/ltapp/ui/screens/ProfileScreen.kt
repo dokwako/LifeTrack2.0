@@ -1,54 +1,68 @@
 package org.lifetrack.ltapp.ui.screens
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.automirrored.filled.Logout
-import androidx.compose.material.icons.filled.*
-import androidx.compose.material3.*
+import androidx.compose.material.icons.filled.ArrowCircleLeft
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Language
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
-import org.koin.androidx.compose.koinViewModel
 import org.lifetrack.ltapp.presenter.AuthPresenter
+import org.lifetrack.ltapp.presenter.UserPresenter
 import org.lifetrack.ltapp.ui.components.profilescreen.CustomProfileMenuItem
 import org.lifetrack.ltapp.ui.components.profilescreen.ProfileMenuItem
-import org.lifetrack.ltapp.ui.theme.LTAppTheme
 import org.lifetrack.ltapp.ui.theme.Purple40
-//import org.lifetrack.ltapp.ui.theme.Purple80
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileScreen(
     navController: NavController,
-    presenter: AuthPresenter
+    authPresenter: AuthPresenter,
+    userPresenter: UserPresenter
+
     ) {
-//    val authPresenter: AuthPresenter = koinViewModel<AuthPresenter>()
     val colorScheme = MaterialTheme.colorScheme
-    val userFullName = remember { mutableStateOf("Dr. Najma") }
-    val userPhoneNumber = remember { mutableStateOf("+(254) 79093 8365") }
+    val profileInfo = userPresenter.profileInfo.collectAsState()
 
     Scaffold(
-        containerColor = colorScheme.primary,
         topBar = {
             TopAppBar(
                 {
@@ -64,45 +78,40 @@ fun ProfileScreen(
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = if(isSystemInDarkTheme()) colorScheme.primary.copy(0.1f) else Purple40, //colorScheme.primary
+                    containerColor = if (isSystemInDarkTheme()) colorScheme.primary.copy(0.1f) else Purple40, //colorScheme.primary
                 )
             )
         }
     ) { innerPadding ->
         Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .background(if(isSystemInDarkTheme()) colorScheme.primary.copy(0.1f) else Purple40)
+                .background(if (isSystemInDarkTheme()) colorScheme.primary.copy(0.1f) else Purple40)
         ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Image(
-                    painter = rememberAsyncImagePainter("https://i.pravatar.cc/300"),
-                    contentDescription = "Profile Image",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .size(100.dp)
-                        .clip(CircleShape)
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-                Text(
-                    text = userFullName.value,
-                    color = colorScheme.onPrimary,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold
-                )
-                Spacer(modifier = Modifier.height(3.dp))
-                Text(
-                    text = userPhoneNumber.value,
-                    color = colorScheme.onPrimary.copy(alpha = 0.8f),
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold
-                )
-            }
-
+            Image(
+                painter = rememberAsyncImagePainter("https://i.pravatar.cc/300"),
+                contentDescription = "Profile Image",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(100.dp)
+                    .clip(CircleShape)
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = profileInfo.value.userName,
+                color = colorScheme.onPrimary,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold
+            )
+            Spacer(modifier = Modifier.height(4.5.dp))
+            Text(
+                text = profileInfo.value.userPhoneNumber,
+                color = colorScheme.onPrimary.copy(alpha = 0.8f),
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold
+            )
             Spacer(modifier = Modifier.height(20.dp))
 
             Card(
@@ -110,62 +119,74 @@ fun ProfileScreen(
                 modifier = Modifier
                     .fillMaxSize(),
                 colors = CardDefaults.cardColors(containerColor = colorScheme.background),
-                elevation = CardDefaults.cardElevation(8.dp)
+                elevation = CardDefaults.cardElevation(8.dp),
+
             ) {
-                Column(modifier = Modifier.padding(20.dp)) {
-                    Text(
-                        text = "Account Overview",
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = colorScheme.onBackground
-                    )
-                    Spacer(modifier = Modifier.height(20.dp))
-                    ProfileMenuItem(
-                        icon = Icons.Default.Person,
-                        title = "Personal Information",
-                        onClick = {}
-                    )
-                    ProfileMenuItem(
-                        icon = Icons.AutoMirrored.Filled.List,
-                        title = "My Medical History",
-                        onClick = {}
-                    )
-                    ProfileMenuItem(icon = Icons.Default.Lock,
-                        title = "Change Password",
-                        onClick = { navController.navigate("restore")
-                        }
-                    )
-                    ProfileMenuItem(
-                        icon = Icons.Default.Language,
-                        title = "Change Language",
-                        onClick = {}
-                    )
-                    CustomProfileMenuItem(
-                        icon = Icons.Default.Delete,
-                        leftIconColor = colorScheme.primary,
-                        title = "Delete My Account",
-                        onClick = { navController.navigate("login") }
-                    )
-                    CustomProfileMenuItem(
-                        icon = Icons.AutoMirrored.Filled.Logout,
-                        leftIconColor = Color.Red,
-                        title = "Logout",
-                        onClick = { presenter.logout(navController) }
-                    )
+                LazyColumn(
+                    contentPadding = PaddingValues(20.dp),
+                    modifier = Modifier
+                        .fillMaxSize(),
+//                        .background(Color.Red),
+                    horizontalAlignment = Alignment.Start,
+                    verticalArrangement = Arrangement.Top
+
+                ) {
+                    item {
+                        Text(
+                            text = "Account Overview",
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = colorScheme.onBackground
+                        )
+                        Spacer(modifier = Modifier.height(20.dp))
+                    }
+                    item {
+                        ProfileMenuItem(
+                            icon = Icons.Default.Person,
+                            title = "Personal Information",
+                            onClick = {}
+                        )
+                    }
+                    item {
+                        ProfileMenuItem(
+                            icon = Icons.AutoMirrored.Filled.List,
+                            title = "My Medical History",
+                            onClick = {}
+                        )
+                    }
+                    item {
+                        ProfileMenuItem(
+                            icon = Icons.Default.Lock,
+                            title = "Change Password",
+                            onClick = { navController.navigate("restore") }
+                        )
+                    }
+                    item {
+                        ProfileMenuItem(
+                            icon = Icons.Default.Language,
+                            title = "Change Language",
+                            onClick = {}
+                        )
+                    }
+                    item {
+                        CustomProfileMenuItem(
+                            icon = Icons.Default.Delete,
+                            leftIconColor = MaterialTheme.colorScheme.primary,
+                            title = "Delete My Account",
+                            onClick = { navController.navigate("login") }
+                        )
+                    }
+                    item {
+                        CustomProfileMenuItem(
+                            icon = Icons.AutoMirrored.Filled.Logout,
+                            leftIconColor = Color.Red,
+                            title = "Logout",
+                            onClick = { authPresenter.logout(navController) }
+                        )
+                    }
                 }
             }
         }
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.S)
-@Preview
-@Composable
-fun PreviewProfileScreen() {
-    LTAppTheme {
-        ProfileScreen(
-            navController = rememberNavController(),
-            presenter = koinViewModel<AuthPresenter>()
-        )
-    }
-}

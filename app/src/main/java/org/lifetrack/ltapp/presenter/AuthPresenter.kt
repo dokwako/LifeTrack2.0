@@ -27,7 +27,6 @@ class AuthPresenter(
         navController.navigate("home")
     }
 
-
     fun signUp(email: String, password: String, telNumber: String, fullName: String){
 
     }

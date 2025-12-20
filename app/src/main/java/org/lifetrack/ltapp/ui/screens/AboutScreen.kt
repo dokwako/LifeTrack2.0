@@ -84,6 +84,7 @@ fun AboutScreen(navController: NavController) {
 
             Text(
                 text = "LifeTrack Health Companion",
+                fontWeight = FontWeight.SemiBold,
                 style = MaterialTheme.typography.headlineMedium.copy(
                     color = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.primary else Color(0xFF2E5EAA),
                     textAlign = TextAlign.Center
@@ -114,25 +115,21 @@ fun AboutScreen(navController: NavController) {
                     modifier = Modifier.padding(24.dp),
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
-//                    Text(
-//                        text = "About LifeTrack",
-//                        style = MaterialTheme.typography.titleLarge.copy(
-//                            color = Color(0xFF2E5EAA)
-//                        )
-//                    )
                     Text(
                         text = "LifeTrack is a cutting-edge, comprehensive health management app designed to empower you with seamless control over your medical history, appointments, and wellness journey.",
-                        style = MaterialTheme.typography.bodyMedium
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = Color(0xFF6C757D)
                     )
 
-//                    HorizontalDivider(
-//                        modifier = Modifier.padding(vertical = 8.dp),
-//                        thickness = 1.dp,
-//                        color = Color(0xFFE9ECEF)
-//                    )
+                    HorizontalDivider(
+                        modifier = Modifier.padding(vertical = 8.dp),
+                        thickness = 1.dp,
+                        color = colorScheme.background
+                    )
 
                     Text(
                         text = "Key Features",
+                        fontWeight = FontWeight.SemiBold,
                         style = MaterialTheme.typography.titleLarge.copy(
                             color = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.primary else Color(0xFF2E5EAA)
                         )
@@ -167,11 +164,12 @@ fun AboutScreen(navController: NavController) {
                     HorizontalDivider(
                         modifier = Modifier.padding(vertical = 8.dp),
                         thickness = 1.dp,
-                        color = Color(0xFFE9ECEF)
+                        color = colorScheme.background
                     )
 
                     Text(
                         text = "Developed By",
+                        fontWeight = FontWeight.SemiBold,
                         style = MaterialTheme.typography.titleLarge.copy(
                             color = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.primary else Color(0xFF2E5EAA)
                         )
@@ -199,12 +197,13 @@ fun AboutScreen(navController: NavController) {
                                 color = colorScheme.background,
                                 shape = MaterialTheme.shapes.medium
                             ),
-//                            .padding(16.dp),
+//                            .padding(10.dp),
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         Text(
                             text = "Contact Us:",
-                            style = MaterialTheme.typography.labelLarge.copy(
+                            fontWeight = FontWeight.SemiBold,
+                            style = MaterialTheme.typography.titleLarge.copy(
                                 color = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.primary else Color(0xFF2E5EAA)
                             )
                         )
