@@ -56,7 +56,8 @@ fun TimeLineScreen(navController: NavController) {
                     )
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.primaryContainer else Purple40,
+                    containerColor = Purple40,
+//                        if (isSystemInDarkTheme()) MaterialTheme.colorScheme.primaryContainer else Purple40,
                     titleContentColor = MaterialTheme.colorScheme.onPrimary
                 ),
                 navigationIcon = {

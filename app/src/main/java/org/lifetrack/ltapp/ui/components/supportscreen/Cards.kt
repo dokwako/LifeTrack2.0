@@ -26,8 +26,7 @@ fun SectionCard(
             .fillMaxWidth(),
 //            .padding(10.dp),
         colors = CardDefaults.cardColors(
-            containerColor = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.background else MaterialTheme.colorScheme.surfaceVariant
-        ),
+            containerColor = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.background else MaterialTheme.colorScheme.surfaceContainer        ),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
@@ -70,7 +69,7 @@ fun ContactItem(
             .padding(vertical = 4.dp)
             .clickable(onClick = onClick),
         colors = CardDefaults.cardColors(
-            containerColor = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.primaryContainer.copy(.2f) else MaterialTheme.colorScheme.surface
+            containerColor = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.primaryContainer.copy(.2f) else MaterialTheme.colorScheme.primaryContainer
         ),
         elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
         shape = RoundedCornerShape(12.dp)

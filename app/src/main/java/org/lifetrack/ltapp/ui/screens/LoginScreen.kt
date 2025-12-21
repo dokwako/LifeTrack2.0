@@ -177,6 +177,8 @@ fun LoginScreen(
     sharedPresenter: SharedPresenter
 ) {
     val loginInfo = presenter.loginInfo.collectAsState()
+    val emailAddress = loginInfo.value.emailAddress
+    val password = loginInfo.value.password
     val coroutineScope = rememberCoroutineScope()
     val snackBarHostState = remember { SnackbarHostState() }
     var passwordVisibility by remember { mutableStateOf(false) }
@@ -193,28 +195,23 @@ fun LoginScreen(
             }
         }
     ) { paddingValues ->
-        // Use LazyColumn to provide a scrollable container
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
                 .background(MaterialTheme.colorScheme.background),
             horizontalAlignment = Alignment.CenterHorizontally,
-            // Adds padding to the bottom so the last item isn't flush against the screen edge
             contentPadding = PaddingValues(bottom = 24.dp)
         ) {
 
-            // 1. Branding Section
             item {
                 LTBrandAppBar(
                     modifier = Modifier.padding(top = 32.dp),
                     sharedPresenter = sharedPresenter
                 )
-                // Spacer replaced with fixed height to separate brand from form
                 Spacer(modifier = Modifier.height(40.dp))
             }
 
-            // 2. Input Form Section
             item {
                 Column(
                     modifier = Modifier.fillMaxWidth(),
@@ -222,7 +219,7 @@ fun LoginScreen(
                 ) {
                     OutlinedTextField(
                         value = loginInfo.value.emailAddress,
-                        onValueChange = { presenter.onLoginInfoUpdate(LoginInfo(emailAddress = it)) },
+                        onValueChange = { presenter.onLoginInfoUpdate(email = it, pwd = password) },
                         label = { Text("Email") },
                         singleLine = true,
                         shape = RoundedCornerShape(8.dp),
@@ -233,7 +230,7 @@ fun LoginScreen(
 
                     OutlinedTextField(
                         value = loginInfo.value.password,
-                        onValueChange = { presenter.onLoginInfoUpdate(LoginInfo(password = it)) },
+                        onValueChange = { presenter.onLoginInfoUpdate(email = emailAddress, pwd = it) },
                         label = { Text("Password") },
                         visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
                         trailingIcon = {
@@ -293,9 +290,7 @@ fun LoginScreen(
                 }
             }
 
-            // 3. Bottom Navigation Section (Sign Up)
             item {
-                // Adjust this spacer to determine how far the footer sits from the button
                 Spacer(modifier = Modifier.height(32.dp))
                 Row(
                     modifier = Modifier.fillMaxWidth(),

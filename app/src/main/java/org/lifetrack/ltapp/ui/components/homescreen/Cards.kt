@@ -22,6 +22,7 @@ import androidx.compose.material.icons.filled.MonitorHeart
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Thermostat
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -46,7 +47,12 @@ import org.lifetrack.ltapp.ui.theme.Purple80
 
 
 @Composable
-fun GlassCard(shape: Shape, modifier: Modifier = Modifier, content: @Composable ColumnScope.() -> Unit) {
+fun GlassCard(
+    shape: Shape,
+    color: CardColors = CardDefaults.cardColors( containerColor = Color.Transparent ),
+    modifier: Modifier = Modifier,
+    content: @Composable ColumnScope.() -> Unit
+) {
     Card(
         modifier = modifier
             .clip(shape)
@@ -61,7 +67,7 @@ fun GlassCard(shape: Shape, modifier: Modifier = Modifier, content: @Composable 
                 ),
                 shape = shape
             ),
-        colors = CardDefaults.cardColors(containerColor = Color.Transparent),
+        colors = color,
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         content = { Column(content = content) }
     )
@@ -185,7 +191,9 @@ fun TodayScheduleCard(
                         text = nextAppointment.time,
                         fontSize = 28.sp,
                         fontWeight = FontWeight.Black,
-                        color = themeColor
+                        color = themeColor,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
                     )
                     Text(
                         text = nextAppointment.doctor,

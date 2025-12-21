@@ -21,11 +21,11 @@ class AuthPresenter(
         return  authRepository.getTokenId()
     }
 
-    fun onLoginInfoUpdate(value: LoginInfo){
+    fun onLoginInfoUpdate(email: String, pwd: String){
         viewModelScope.launch {
             _loginInfo.value = LoginInfo(
-                emailAddress = value.emailAddress,
-                password = value.password
+                emailAddress = email,
+                password = pwd
             )
         }
     }

@@ -1,4 +1,6 @@
 package org.lifetrack.ltapp.ui.screens
+
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -34,6 +36,7 @@ import androidx.navigation.NavController
 import org.lifetrack.ltapp.ui.components.supportscreen.ContactItem
 import org.lifetrack.ltapp.ui.components.supportscreen.FAQItem
 import org.lifetrack.ltapp.ui.components.supportscreen.SectionCard
+import org.lifetrack.ltapp.ui.theme.Purple40
 import org.lifetrack.ltapp.utils.openDialer
 import org.lifetrack.ltapp.utils.openEmail
 
@@ -64,7 +67,7 @@ fun SupportScreen(
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    containerColor = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.primaryContainer else Purple40,
                     scrolledContainerColor = Color.Unspecified,
                     navigationIconContentColor = Color.Unspecified,
                     titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer,

@@ -1,12 +1,14 @@
 package org.lifetrack.ltapp.presenter
 
 import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.material.icons.Icons
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
+import androidx.compose.material.icons.filled.*
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.lifecycle.ViewModel
-import org.lifetrack.ltapp.ui.theme.Purple40
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
@@ -19,10 +21,10 @@ class EPrescriptPresenter : ViewModel() {
 
     fun getStatusColor(filter: String): Color {
         return when (filter) {
-            "Active" -> Color(0xFF81C784)
-            "Refills" -> Color(0xFFFFB74D)
-            "Expired" -> Color(0xFFEF5350)
-            else -> Purple40
+            "Active" -> Color(0xFF2E7D32)
+            "Refills" -> Color(0xFFEF6C00)
+            "Expired" -> Color(0xFFD32F2F)
+            else -> Color(0xFF4A148C)
         }
     }
 
@@ -34,5 +36,23 @@ class EPrescriptPresenter : ViewModel() {
         } catch (e: Exception) {
             false
         }
+    }
+
+    fun getIconForFilter(filter: String): ImageVector {
+        return when (filter) {
+            "Active" -> Icons.Default.CheckCircle
+            "Refills" -> Icons.Default.Autorenew
+            "Expired" -> Icons.Default.EventBusy
+            else -> Icons.Default.History
+        }
+    }
+
+    // Success Sheet State
+    var showSuccessSheet by mutableStateOf(false)
+    var lastRequestedMedication by mutableStateOf("")
+
+    fun triggerRefillRequest(medicationName: String) {
+        lastRequestedMedication = medicationName
+        showSuccessSheet = true
     }
 }

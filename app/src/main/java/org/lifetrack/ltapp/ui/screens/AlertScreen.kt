@@ -23,6 +23,7 @@ import kotlinx.coroutines.delay
 import org.lifetrack.ltapp.model.data.epidemicAlerts
 import org.lifetrack.ltapp.ui.components.alertscreen.AlertSummaryCard
 import org.lifetrack.ltapp.ui.components.alertscreen.EpidemicAlertCard
+import org.lifetrack.ltapp.ui.theme.Purple40
 
 
 @OptIn(ExperimentalMaterial3Api::class)

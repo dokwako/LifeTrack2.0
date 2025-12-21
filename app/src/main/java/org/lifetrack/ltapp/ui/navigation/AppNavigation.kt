@@ -29,7 +29,7 @@ fun AppNavigation(navController: NavHostController) {
 
     NavHost(
         navController = navController,
-        startDestination = "home"
+        startDestination = "support"
     ) {
 
         composable("splash") {

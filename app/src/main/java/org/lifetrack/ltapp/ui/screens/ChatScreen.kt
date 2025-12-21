@@ -26,12 +26,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import kotlinx.coroutines.launch
 import org.lifetrack.ltapp.presenter.ChatPresenter
 import org.lifetrack.ltapp.ui.components.chatscreen.BBarMessage
 import org.lifetrack.ltapp.ui.components.medicalcharts.MessageBubble
+import org.lifetrack.ltapp.ui.theme.Purple40
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -60,10 +62,12 @@ fun ChatScreen(
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Text(
                                 text = "Dr. Najma",
+                                fontWeight = FontWeight.Bold,
                                 style = MaterialTheme.typography.titleLarge
                             )
                             Text(
                                 "Offline",
+                                fontWeight = FontWeight.SemiBold,
                                 style = MaterialTheme.typography.labelSmall
                             )
                         }
@@ -74,12 +78,10 @@ fun ChatScreen(
                         }
                     },
                     actions = {
-//                        IconButton(onClick = { /* Export */ }) {
-//                            Icon(Icons.Default.Share, "Export")
-//                        }
+
                     },
                     colors = TopAppBarDefaults.topAppBarColors(
-                        containerColor = MaterialTheme.colorScheme.primaryContainer,
+                        containerColor = Purple40, // MaterialTheme.colorScheme.primaryContainer,
                         titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer
                     )
                 )

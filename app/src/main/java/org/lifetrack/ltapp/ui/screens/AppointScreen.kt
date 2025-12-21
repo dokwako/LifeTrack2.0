@@ -55,12 +55,23 @@ fun AppointScreen(
                         Icon(Icons.Default.ArrowCircleLeft, "Back", tint = Color.White)
                     }
                 },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = Purple40)
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = Purple40
+                )
             )
         },
         bottomBar = {
-            Surface(tonalElevation = 8.dp, shadowElevation = 8.dp, color = MaterialTheme.colorScheme.background) {
-                Column(modifier = Modifier.navigationBarsPadding().padding(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+            Surface(
+                tonalElevation = 8.dp,
+                shadowElevation = 8.dp,
+                color = MaterialTheme.colorScheme.background
+            ) {
+                Column(
+                    modifier = Modifier
+                        .navigationBarsPadding()
+                        .padding(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
                     DoctorSelectionDropDown(userPresenter)
                     Button(
                         onClick = { userPresenter.bookAppointment() },
@@ -71,7 +82,11 @@ fun AppointScreen(
             }
         }
     ) { padding ->
-        LazyColumn(modifier = Modifier.padding(padding).fillMaxSize(), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        LazyColumn(
+            modifier = Modifier
+                .padding(padding)
+                .fillMaxSize(),
+            verticalArrangement = Arrangement.spacedBy(16.dp)) {
             item {
                 LazyRow(
                     modifier = Modifier.fillMaxWidth().padding(top = 15.dp),

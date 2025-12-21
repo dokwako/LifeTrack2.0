@@ -1,5 +1,6 @@
 package org.lifetrack.ltapp.ui.components.prescriptscreen
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,6 +16,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -28,7 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.lifetrack.ltapp.model.data.dclass.Prescription
 import org.lifetrack.ltapp.ui.components.homescreen.GlassCard
-import org.lifetrack.ltapp.ui.theme.Purple40
+import org.lifetrack.ltapp.ui.theme.HospitalBlue
 
 
 @Composable
@@ -39,19 +41,25 @@ fun PrescriptionCard(
 ) {
     val isDark = isSystemInDarkTheme()
     val isRefillDue = prescription.status == "Refill Due" && !isExpired
-
-    val headerColor = if (isExpired) Color(0xFFEF5350) else if (isDark) Color(0xFFE1BEE7) else Purple40
-    val bodyTextColor = if (isDark) Color.White else Color(0xFF1A1C1E)
-
-    val dateTextColor = if (isExpired) Color(0xFFEF5350) else Color.Gray
+    val headerColor = when {
+        isExpired -> Color(0xFFD32F2F)
+        isDark -> Color(0xFFE1BEE7)
+        else -> Color(0xFF4A148C)
+    }
+    val bodyTextColor = if (isDark) Color.White else Color.DarkGray
+    val dateTextColor = if (isExpired) Color(0xFFD32F2F) else Color.Gray
     val dateWeight = if (!isExpired) FontWeight.Bold else FontWeight.ExtraBold
 
     GlassCard(
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(18.dp)
+        modifier = Modifier
+            .fillMaxWidth(),
+        shape = RoundedCornerShape(18.dp),
+        color = CardDefaults.cardColors(
+            if (isSystemInDarkTheme()) Color(0xFF1E1E1E)
+            else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
+        )
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
-
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
@@ -60,41 +68,38 @@ fun PrescriptionCard(
                         fontWeight = FontWeight.ExtraBold,
                         color = headerColor
                     )
-                    Spacer(Modifier.height(12.dp))
+                    Spacer(Modifier.height(10.dp))
                     Text(
                         text = prescription.dosage,
-                        fontWeight = FontWeight.Bold,
+                        fontSize = 14.sp,
                         style = MaterialTheme.typography.bodyMedium,
-                        color = if (isDark) Color(0xFFCE93D8) else Purple40.copy(alpha = 0.8f)
+                        fontWeight = FontWeight.Bold,
+                        color = if (isDark) Color(0xFFCE93D8) else bodyTextColor //Pink 40
                     )
                 }
-
                 if (isExpired) {
-                    StatusBadge(text = "EXPIRED", color = Color(0xFFEF5350))
+                    StatusBadge(text = "EXPIRED", color = Color(0xFFD32F2F))
                 } else if (isRefillDue) {
-                    StatusBadge(text = "REFILL DUE", color = Color(0xFFFFB74D))
+                    StatusBadge(text = "REFILL DUE", color = Color(0xFFEF6C00))
                 }
             }
-            Spacer(Modifier.height(12.dp))
+            Spacer(Modifier.height(10.dp))
             Text(
                 text = prescription.instructions,
                 style = MaterialTheme.typography.bodyMedium,
                 color = bodyTextColor,
                 lineHeight = 20.sp,
-                fontWeight = dateWeight
+                fontWeight = FontWeight.Bold
             )
+
             if (!isExpired) {
                 Spacer(Modifier.height(16.dp))
-
                 if (prescription.refillProgress > 0) {
                     LinearProgressIndicator(
                         progress = { prescription.refillProgress },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(8.dp)
-                            .clip(RoundedCornerShape(4.dp)),
-                        color = if (isRefillDue) Color(0xFFFFB74D) else Color(0xFF81C784),
-                        trackColor = Color.Gray.copy(alpha = 0.2f),
+                        modifier = Modifier.fillMaxWidth().height(8.dp).clip(RoundedCornerShape(4.dp)),
+                        color = if (isRefillDue) Color(0xFFEF6C00) else Color(0xFF2E7D32),
+                        trackColor = if (isDark) Color.White.copy(0.1f) else Color.Black.copy(0.05f),
                     )
                 }
 
@@ -104,15 +109,15 @@ fun PrescriptionCard(
                         onClick = { onRefillRequest(prescription) },
                         modifier = Modifier.fillMaxWidth(),
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = Color(0xFFFFB74D).copy(alpha = 0.15f),
+                            containerColor = if (isDark) Color(0xFFFFB74D).copy(0.15f) else Color(0xFFFFF3E0),
                             contentColor = if (isDark) Color(0xFFFFB74D) else Color(0xFFE65100)
                         ),
                         shape = RoundedCornerShape(12.dp),
-                        border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFFFB74D).copy(0.4f))
+                        border = BorderStroke(1.dp, Color(0xFFEF6C00).copy(0.3f))
                     ) {
-                        Icon(Icons.Default.Share, contentDescription = null, modifier = Modifier.size(16.dp))
+                        Icon(Icons.Default.Share, null, modifier = Modifier.size(16.dp))
                         Spacer(Modifier.width(8.dp))
-                        Text("Request Doctor Refill", fontWeight = FontWeight.Bold)
+                        Text("Request Doctor Refill", fontWeight = FontWeight.ExtraBold)
                     }
                 }
             }
@@ -123,14 +128,14 @@ fun PrescriptionCard(
                 Text(
                     text = "Ends: ${prescription.endDate}",
                     style = MaterialTheme.typography.bodyMedium,
-                    color = dateTextColor,
+                    color =  if (isSystemInDarkTheme()) dateTextColor else (if (isExpired) Color(0xFFD32F2F) else HospitalBlue),
                     fontWeight = dateWeight
                 )
                 Text(
                     text = "Dr. ${prescription.prescribedBy}",
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Bold,
-                    color = if (isDark) Color(0xFFCE93D8) else Purple40
+                    color = if (isDark) Color(0xFFCE93D8) else Color(0xFF4A148C)
                 )
             }
         }

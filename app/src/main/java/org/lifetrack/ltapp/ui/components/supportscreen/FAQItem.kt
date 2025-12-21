@@ -31,7 +31,7 @@ fun FAQItem(question: String, answer: String) {
                 if (isSystemInDarkTheme()){
                     MaterialTheme.colorScheme.primaryContainer.copy(0.4f)
                 }else {
-                    MaterialTheme.colorScheme.surface
+                    MaterialTheme.colorScheme.primaryContainer
                 }
             }
         ),

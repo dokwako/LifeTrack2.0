@@ -34,7 +34,6 @@ fun LTAppTheme(
     }
     val view = LocalView.current
     SideEffect {
-//        val window =
         val controller = WindowCompat.getInsetsController(
             (view.context as Activity).window,
             view
