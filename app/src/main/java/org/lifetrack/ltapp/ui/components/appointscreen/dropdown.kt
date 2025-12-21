@@ -1,6 +1,7 @@
 package org.lifetrack.ltapp.ui.components.appointscreen
 
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -79,7 +80,10 @@ fun DoctorSelectionDropDown(userPresenter: UserPresenter) {
                 dummyDoctors.forEach { doctor ->
                     DropdownMenuItem(
                         text = {
-                            Column(modifier = Modifier.padding(vertical = 4.dp)) {
+                            Column(
+                                modifier = Modifier.padding(vertical = 6.dp),
+                                verticalArrangement = Arrangement.spacedBy(4.dp)
+                                ) {
                                 Text(
                                     text = doctor.name,
                                     style = MaterialTheme.typography.bodyLarge,
@@ -87,12 +91,14 @@ fun DoctorSelectionDropDown(userPresenter: UserPresenter) {
                                 )
                                 Text(
                                     text = "${doctor.specialty} • ${doctor.hospital}",
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    style = MaterialTheme.typography.bodyLarge,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    fontWeight = FontWeight.SemiBold
                                 )
                                 Row(
                                     modifier = Modifier.padding(top = 2.dp),
-                                    verticalAlignment = Alignment.CenterVertically
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(4.dp)
                                 ) {
                                     Icon(
                                         imageVector = Icons.Default.Star,
@@ -102,14 +108,15 @@ fun DoctorSelectionDropDown(userPresenter: UserPresenter) {
                                     )
                                     Text(
                                         text = " ${doctor.rating}  |  Exp: ${doctor.experienceYears} yrs  |  Wait: ${doctor.waitTime}",
-                                        style = MaterialTheme.typography.labelSmall,
+                                        style = MaterialTheme.typography.bodyMedium,
                                         color = MaterialTheme.colorScheme.primary
+
                                     )
                                 }
                                 if (doctor.status == "Busy") {
                                     Text(
                                         text = "Currently Busy",
-                                        style = MaterialTheme.typography.labelSmall,
+                                        style = MaterialTheme.typography.bodyMedium,
                                         color = MaterialTheme.colorScheme.error,
                                         fontWeight = FontWeight.Medium
                                     )
