@@ -47,13 +47,13 @@ data class LabTest(
     val results: Map<String, String>
 )
 
-data class Prescription (
-    val id: String,
-    val medication: String,
-    val dosage: String,
-    val duration: String,
-    val notes: String?
-)
+//data class Prescription (
+//    val id: String,
+//    val medication: String,
+//    val dosage: String,
+//    val duration: String,
+//    val notes: String?
+//)
 
 data class EpidemicAlert(
     val id: Int,
@@ -78,5 +78,18 @@ data class Appointment(
     val doctor: String,
     val date: String,
     val time: String,
-    val hospital: String
+    val hospital: String,
+    val status: String
+)
+
+data class Prescription(
+    val id: String,
+    val medicationName: String,
+    val dosage: String,
+    val instructions: String,
+    val prescribedBy: String,
+    val startDate: String,
+    val endDate: String,
+    val status: String, // "Active", "Completed", "Refill Due"
+    val refillProgress: Float = 0f // 0.0 to 1.0
 )

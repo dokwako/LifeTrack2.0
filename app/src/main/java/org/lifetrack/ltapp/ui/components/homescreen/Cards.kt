@@ -37,8 +37,10 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import org.lifetrack.ltapp.model.data.dclass.Appointment
 import org.lifetrack.ltapp.ui.theme.Purple40
 import org.lifetrack.ltapp.ui.theme.Purple80
 
@@ -115,76 +117,103 @@ fun GlassActionCard(title: String, icon: ImageVector, onClick: () -> Unit) {
 }
 
 @Composable
-fun TodayScheduleCard(){
+fun TodayScheduleCard(
+    appointmentCount: Int,
+    nextAppointment: Appointment?
+) {
+    val themeColor = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.primary else Purple40
+    val subTextColor = if (isSystemInDarkTheme()) Color.Gray else Color(0xFF5F6368)
+
     GlassCard(
         shape = RoundedCornerShape(22.dp),
         modifier = Modifier
             .fillMaxWidth()
-            .fillMaxHeight()
-) {
+            .height(200.dp)
+    ) {
         Row(
             modifier = Modifier
-                .padding(10.dp)
-                .fillMaxWidth()
-//            .background(color = MaterialTheme.colorScheme.surfaceVariant)
-//            .pulsate()
+                .padding(20.dp)
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Column(modifier = Modifier.padding(10.dp)) {
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.Center
+            ) {
                 Text(
-                    "Today's Schedule",
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 24.sp,
+                    text = "TODAY'S SCHEDULE",
                     style = MaterialTheme.typography.titleMedium,
-                    color = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.primary else Purple40
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = 18.sp,
+                    color = themeColor
                 )
-                Spacer(Modifier.height(16.dp))
-                Row(
-                    Modifier
-                ) {
-                    Text(
-                        textAlign = TextAlign.End,
-                        text = "7",
-                        fontSize = 64.sp,
-                        fontWeight = FontWeight.ExtraBold,
-                        color = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.primary else Purple40
-                    )
-                }
-                Spacer(Modifier.height(4.dp))
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                Text(
+                    text = appointmentCount.toString(),
+                    fontSize = 64.sp,
+                    fontWeight = FontWeight.ExtraBold,
+                    color = themeColor
+                )
 
                 Text(
                     text = "Appointments",
                     fontWeight = FontWeight.SemiBold,
-                    color = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.primary else Purple40
+                    color = themeColor
+                )
+            }
+
+            Spacer(modifier = Modifier.width(20.dp))
+
+            Column(
+                modifier = Modifier.weight(1.2f),
+                horizontalAlignment = Alignment.End
+            ) {
+                Text(
+                    text = "NEXT UP",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = if (isSystemInDarkTheme()) subTextColor else MaterialTheme.colorScheme.primary,
+                    fontWeight = FontWeight.Bold,
+                    letterSpacing = 1.sp
                 )
 
-            }
-            Column(
-                modifier = Modifier
-                    .padding(top = 60.dp)
-                    .fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Row(modifier = Modifier.padding(bottom = 10.dp)) {
-                    IconButton(onClick = {}) {
-                        Icon(
-                            Icons.Default.Notifications,
-                            contentDescription = "Upcoming",
-                            modifier = Modifier
-                                .size(45.dp)
-                        )
-                    }
+                Spacer(modifier = Modifier.height(20.dp))
+
+                if (nextAppointment != null) {
                     Text(
-                        text = "14",
-                        textAlign = TextAlign.Right,
-                        color = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.primary else Purple40
+                        text = nextAppointment.time,
+                        fontSize = 28.sp,
+                        fontWeight = FontWeight.Black,
+                        color = themeColor
+                    )
+                    Text(
+                        text = nextAppointment.doctor,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp,
+                        textAlign = TextAlign.End,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        color = themeColor
+                    )
+                    Text(
+                        text = nextAppointment.hospital,
+                        fontSize = 14.sp,
+                        textAlign = TextAlign.End,
+                        color = if (isSystemInDarkTheme()) subTextColor else MaterialTheme.colorScheme.primary,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        fontWeight = FontWeight.Bold
+                    )
+                } else {
+                    Text(
+                        text = "All Caught Up!",
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color(0xFF4CAF50),
+                        modifier = Modifier.padding(top = 8.dp)
                     )
                 }
-                Spacer(modifier = Modifier.height(4.dp))
-                Text(
-                    "Upcoming",
-                    fontWeight = FontWeight.SemiBold,
-                    color = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.primary else Purple40
-                )
             }
         }
     }

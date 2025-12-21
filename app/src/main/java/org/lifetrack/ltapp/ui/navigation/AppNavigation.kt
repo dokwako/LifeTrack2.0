@@ -8,8 +8,10 @@ import org.koin.androidx.compose.koinViewModel
 import org.lifetrack.ltapp.presenter.AnalyticPresenter
 import org.lifetrack.ltapp.presenter.AuthPresenter
 import org.lifetrack.ltapp.presenter.ChatPresenter
+import org.lifetrack.ltapp.presenter.EPrescriptPresenter
 import org.lifetrack.ltapp.presenter.FUVPresenter
 import org.lifetrack.ltapp.presenter.HomePresenter
+import org.lifetrack.ltapp.presenter.SettingsPresenter
 import org.lifetrack.ltapp.presenter.SharedPresenter
 import org.lifetrack.ltapp.presenter.UserPresenter
 import org.lifetrack.ltapp.ui.screens.*
@@ -22,6 +24,8 @@ fun AppNavigation(navController: NavHostController) {
     val chatPresenter = koinViewModel<ChatPresenter>()
     val userPresenter = koinViewModel<UserPresenter>()
     val sharedPresenter = koinViewModel<SharedPresenter>()
+    val settingsPresenter = koinViewModel<SettingsPresenter>()
+
 
     NavHost(
         navController = navController,
@@ -50,7 +54,8 @@ fun AppNavigation(navController: NavHostController) {
         composable("home") {
             HomeScreen(
                 navController = navController,
-                presenter = koinViewModel<HomePresenter>()
+                presenter = koinViewModel<HomePresenter>(),
+                userPresenter = userPresenter
             )
         }
 
@@ -73,7 +78,8 @@ fun AppNavigation(navController: NavHostController) {
             MenuScreen(
                 navController = navController,
                 userPresenter = userPresenter,
-                sharedPresenter = sharedPresenter
+                sharedPresenter = sharedPresenter,
+                settingsPresenter = settingsPresenter
             )
         }
 
@@ -106,7 +112,8 @@ fun AppNavigation(navController: NavHostController) {
         composable("prescriptions") {
             PrescriptScreen(
                 navController = navController,
-                presenter = analyticPresenter
+                analyticPresenter = analyticPresenter,
+                presenter = koinViewModel<EPrescriptPresenter>()
                 )
         }
 

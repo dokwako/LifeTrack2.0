@@ -14,8 +14,10 @@ import org.lifetrack.ltapp.model.repository.ChatRepository
 import org.lifetrack.ltapp.presenter.AnalyticPresenter
 import org.lifetrack.ltapp.presenter.AuthPresenter
 import org.lifetrack.ltapp.presenter.ChatPresenter
+import org.lifetrack.ltapp.presenter.EPrescriptPresenter
 import org.lifetrack.ltapp.presenter.FUVPresenter
 import org.lifetrack.ltapp.presenter.HomePresenter
+import org.lifetrack.ltapp.presenter.SettingsPresenter
 import org.lifetrack.ltapp.presenter.SharedPresenter
 import org.lifetrack.ltapp.presenter.UserPresenter
 
@@ -43,8 +45,10 @@ val koinModule = module {
     viewModelOf(::HomePresenter)
     viewModelOf(::UserPresenter)
     viewModelOf(::FUVPresenter)
+    viewModelOf(::SettingsPresenter)
     viewModelOf(::SharedPresenter)
     viewModelOf(::AnalyticPresenter)
+    viewModelOf(::EPrescriptPresenter)
     viewModel {
         (savedStateHandle: SavedStateHandle) ->
         ChatPresenter(get(), savedStateHandle)

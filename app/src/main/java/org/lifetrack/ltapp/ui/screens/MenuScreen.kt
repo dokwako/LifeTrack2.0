@@ -40,6 +40,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import org.lifetrack.ltapp.model.data.dclass.ToggleItemData
+import org.lifetrack.ltapp.presenter.SettingsPresenter
 import org.lifetrack.ltapp.presenter.SharedPresenter
 import org.lifetrack.ltapp.presenter.UserPresenter
 import org.lifetrack.ltapp.ui.components.menuscreen.MenuListItem
@@ -50,6 +51,7 @@ import org.lifetrack.ltapp.ui.theme.Purple40
 @Composable
 fun MenuScreen(
     navController: NavController,
+    settingsPresenter: SettingsPresenter,
     userPresenter: UserPresenter,
     sharedPresenter: SharedPresenter
     ) {
@@ -136,9 +138,9 @@ fun MenuScreen(
                     color = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.primary else Purple40,
                     toggleItem = ToggleItemData("Email Notifications", Icons.Default.Email),
                     onToggle = {
-                        userPresenter.onEmailNotificationsUpdate()
+                        settingsPresenter.onEmailNotificationsUpdate()
                     },
-                    toggleState = userPresenter.emailNotificationToggleState
+                    toggleState = settingsPresenter.emailNotificationToggleState
                 )
             }
 
@@ -158,9 +160,9 @@ fun MenuScreen(
                     color = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.primary else Purple40,
                     toggleItem = ToggleItemData("App Notifications", Icons.Default.Notifications),
                     onToggle = {
-                        userPresenter.onUserNotificationsUpdate()
+                        settingsPresenter.onUserNotificationsUpdate()
                     },
-                    toggleState = userPresenter.appNotificationToggleState
+                    toggleState = settingsPresenter.appNotificationToggleState
                 )
             }
 
@@ -169,13 +171,13 @@ fun MenuScreen(
                     color = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.primary else Purple40,
                     toggleItem = ToggleItemData("Patient Data Consent", Icons.Filled.MedicalInformation),
                     onToggle = {
-                        userPresenter.onPatientInfoConsentUpdate()
+                        settingsPresenter.onPatientInfoConsentUpdate()
                     },
-                    toggleState = userPresenter.patientInfoConsentToggleState
+                    toggleState = settingsPresenter.patientInfoConsentToggleState
                 )
             }
 
-            items(userPresenter.menuItems) { item ->
+            items(settingsPresenter.menuItems) { item ->
                 MenuListItem(
                     onClick = {
                         userPresenter.onMenuItemAction(
@@ -188,23 +190,5 @@ fun MenuScreen(
                 )
             }
         }
-//        Row (
-//            verticalAlignment = Alignment.Bottom,
-//            horizontalArrangement = Arrangement.Center,
-//            modifier = Modifier
-//                .fillMaxWidth()
-//
-//        ) {
-//            Text(
-//                text = "Version 1.0.0",
-//                fontWeight = FontWeight.ExtraBold,
-//                style = MaterialTheme.typography.labelSmall,
-//                color = MaterialTheme.colorScheme.onSurfaceVariant,
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .padding(top = 16.dp),
-//                textAlign = TextAlign.Center
-//            )
-//        }
     }
 }

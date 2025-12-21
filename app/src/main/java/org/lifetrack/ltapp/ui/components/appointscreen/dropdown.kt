@@ -87,7 +87,7 @@ fun DoctorSelectionDropDown(userPresenter: UserPresenter) {
                                 Text(
                                     text = doctor.name,
                                     style = MaterialTheme.typography.bodyLarge,
-                                    fontWeight = FontWeight.Bold
+                                    fontWeight = FontWeight.ExtraBold
                                 )
                                 Text(
                                     text = "${doctor.specialty} • ${doctor.hospital}",
@@ -108,9 +108,8 @@ fun DoctorSelectionDropDown(userPresenter: UserPresenter) {
                                     )
                                     Text(
                                         text = " ${doctor.rating}  |  Exp: ${doctor.experienceYears} yrs  |  Wait: ${doctor.waitTime}",
-                                        style = MaterialTheme.typography.bodyMedium,
+                                        style = MaterialTheme.typography.bodyLarge,
                                         color = MaterialTheme.colorScheme.primary
-
                                     )
                                 }
                                 if (doctor.status == "Busy") {

@@ -20,22 +20,44 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun StatusChip(label: String, count: String?, accentColor: Color, icon: ImageVector) {
+fun StatusChip(
+    label: String,
+    count: String?,
+    accentColor: Color,
+    icon: ImageVector,
+    isSelected: Boolean,
+    onClick: () -> Unit
+) {
     Surface(
+        onClick = onClick,
         shape = RoundedCornerShape(16.dp),
-        color = accentColor.copy(alpha = 0.1f),
+        color = if (isSelected) accentColor else accentColor.copy(alpha = 0.1f),
         border = BorderStroke(1.dp, accentColor.copy(alpha = 0.5f))
     ) {
         Row(
             modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(icon, contentDescription = null, tint = accentColor, modifier = Modifier.size(18.dp))
+            Icon(
+                icon,
+                contentDescription = null,
+                tint = if (isSelected) Color.White else accentColor,
+                modifier = Modifier.size(18.dp)
+            )
             Spacer(Modifier.width(8.dp))
-            Text(label, style = MaterialTheme.typography.labelLarge, color = accentColor)
-            if (count != null) {
+            Text(
+                label,
+                style = MaterialTheme.typography.labelLarge,
+                color = if (isSelected) Color.White else accentColor,
+                fontWeight = if (isSelected) FontWeight.ExtraBold else FontWeight.SemiBold
+            )
+            if (count != null && count != "0") {
                 Spacer(Modifier.width(6.dp))
-                Text(count, fontWeight = FontWeight.Bold, color = accentColor)
+                Text(
+                    count,
+                    fontWeight = FontWeight.ExtraBold,
+                    color = if (isSelected) Color.White else accentColor
+                )
             }
         }
     }

@@ -21,8 +21,6 @@ import org.lifetrack.ltapp.ui.theme.PremiumPurple
 import org.lifetrack.ltapp.ui.theme.PremiumTeal
 import java.time.LocalDate
 import java.util.Date
-import kotlin.uuid.ExperimentalUuidApi
-import kotlin.uuid.Uuid
 
 val epidemicAlerts = listOf(
     EpidemicAlert(
@@ -175,21 +173,72 @@ val dLabTests = listOf(
     )
 )
 
-@OptIn(ExperimentalUuidApi::class)
-val dPrescriptions = mutableListOf(
+val dPrescriptions = listOf(
     Prescription(
-        id = Uuid.random().toHexString(),
-        medication = "Lisinopril 10mg",
-        dosage = "Once daily",
-        duration = "30 days",
-        notes = "For blood pressure control"
+        id = "1",
+        medicationName = "Amoxicillin 500mg",
+        dosage = "1 tablet, twice daily",
+        instructions = "Take after meals. Complete full course.",
+        prescribedBy = "Anya Sharma",
+        startDate = "Dec 18, 2025",
+        endDate = "Dec 28, 2025", // ACTIVE
+        status = "Active",
+        refillProgress = 0.3f
     ),
     Prescription(
-        id = Uuid.random().toHexString(),
-        medication = "Metformin 500mg",
-        dosage = "Twice daily",
-        duration = "90 days",
-        notes = "With meals"
+        id = "2",
+        medicationName = "Lisinopril 10mg",
+        dosage = "1 tablet daily",
+        instructions = "Take in the morning. Avoid salt substitutes.",
+        prescribedBy = "James Mwangi",
+        startDate = "Nov 15, 2025",
+        endDate = "Dec 22, 2025", // REFILL DUE (Ends tomorrow)
+        status = "Refill Due",
+        refillProgress = 0.9f
+    ),
+    Prescription(
+        id = "3",
+        medicationName = "Ibuprofen 400mg",
+        dosage = "1 tablet every 6 hours",
+        instructions = "Take for pain. Do not exceed 3/day.",
+        prescribedBy = "Anya Sharma",
+        startDate = "Dec 01, 2025",
+        endDate = "Dec 15, 2025", // EXPIRED (Passed)
+        status = "History",
+        refillProgress = 0f
+    ),
+    Prescription(
+        id = "4",
+        medicationName = "Ventolin Inhaler",
+        dosage = "2 puffs as needed",
+        instructions = "Use for shortness of breath.",
+        prescribedBy = "Sarah Chen",
+        startDate = "Oct 10, 2025",
+        endDate = "Nov 10, 2025", // EXPIRED (Passed)
+        status = "History",
+        refillProgress = 0f
+    ),
+    Prescription(
+        id = "5",
+        medicationName = "Metformin 500mg",
+        dosage = "1 tablet with dinner",
+        instructions = "Monitor blood sugar levels daily.",
+        prescribedBy = "James Mwangi",
+        startDate = "Dec 20, 2025",
+        endDate = "Jan 20, 2026", // ACTIVE
+        status = "Active",
+        refillProgress = 0.05f
+    ),
+    Prescription(
+        id = "6",
+        medicationName = "Vitamin D3 2000IU",
+        dosage = "1 softgel daily",
+        instructions = "Take with a fat-containing meal.",
+        prescribedBy = "Sarah Chen",
+        startDate = "Dec 01, 2025",
+        endDate = "Jun 01, 2026", // ACTIVE
+        status = "Active",
+        refillProgress = 0.1f
     )
 )
 
@@ -359,7 +408,9 @@ val dummyHospitalData = listOf(
 )
 
 val dummyAppointments = listOf(
-    Appointment("Dr. Anya Sharma", "Mon, Oct 26", "10:00 AM", "Nairobi West Hospital"),
-    Appointment("Dr. Ben Carter", "Tue, Oct 27", "10:00 AM", "Mama Lucy Kibaki"),
-    Appointment("Dr. Ben Carter", "Tue, Oct 27", "12:30 PM", "Nairobi West Hospital")
+    Appointment("Dr. Anya Sharma", "Mon, Oct 26", "10:00 AM", "Nairobi West Hospital", "Upcoming"),
+    Appointment("Dr. Ben Carter", "Tue, Oct 27", "10:00 AM", "Mama Lucy Kibaki", "Attended"),
+    Appointment("Dr. Hilary Otieno", "Wed, Oct 28", "09:00 AM", "Nakuru General", "Rescheduled"),
+    Appointment("Dr. Tabitha Kerry", "Thu, Oct 29", "11:30 AM", "Kabarak Mission", "Dismissed"),
+    Appointment("Dr. James Mwangi", "Fri, Oct 30", "02:00 PM", "Nairobi City", "Upcoming")
 )
