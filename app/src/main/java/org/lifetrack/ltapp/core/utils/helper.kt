@@ -1,4 +1,4 @@
-package org.lifetrack.ltapp.utils
+package org.lifetrack.ltapp.core.utils
 
 import org.lifetrack.ltapp.model.database.room.MessageEntity
 import org.lifetrack.ltapp.model.data.dto.Message

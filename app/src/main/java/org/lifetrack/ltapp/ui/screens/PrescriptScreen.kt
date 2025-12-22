@@ -112,6 +112,9 @@ fun PrescriptScreen(
                             isExpired = presenter.isDateExpired(prescription.endDate),
                             onRefillRequest = { med ->
                                 presenter.triggerRefillRequest(med.medicationName)
+                            },
+                            onCardClick = {
+                                navController.navigate("prescription_detail/${prescription.id}")
                             }
                         )
                     }

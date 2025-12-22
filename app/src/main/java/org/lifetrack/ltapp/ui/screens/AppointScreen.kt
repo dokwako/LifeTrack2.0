@@ -64,7 +64,7 @@ fun AppointScreen(
             Surface(
                 tonalElevation = 8.dp,
                 shadowElevation = 8.dp,
-                color = MaterialTheme.colorScheme.background
+                color = if (isSystemInDarkTheme()) Color(0xFF121212) else MaterialTheme.colorScheme.background
             ) {
                 Column(
                     modifier = Modifier

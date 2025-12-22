@@ -37,8 +37,8 @@ import org.lifetrack.ltapp.ui.components.supportscreen.ContactItem
 import org.lifetrack.ltapp.ui.components.supportscreen.FAQItem
 import org.lifetrack.ltapp.ui.components.supportscreen.SectionCard
 import org.lifetrack.ltapp.ui.theme.Purple40
-import org.lifetrack.ltapp.utils.openDialer
-import org.lifetrack.ltapp.utils.openEmail
+import org.lifetrack.ltapp.core.utils.openDialer
+import org.lifetrack.ltapp.core.utils.openEmail
 
 
 @OptIn(ExperimentalMaterial3Api::class)

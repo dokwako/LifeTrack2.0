@@ -1,6 +1,7 @@
 package org.lifetrack.ltapp.ui.components.prescriptscreen
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -37,7 +38,8 @@ import org.lifetrack.ltapp.ui.theme.HospitalBlue
 fun PrescriptionCard(
     prescription: Prescription,
     isExpired: Boolean,
-    onRefillRequest: (Prescription) -> Unit = {}
+    onRefillRequest: (Prescription) -> Unit = {},
+    onCardClick: () -> Unit
 ) {
     val isDark = isSystemInDarkTheme()
     val isRefillDue = prescription.status == "Refill Due" && !isExpired
@@ -52,6 +54,7 @@ fun PrescriptionCard(
 
     GlassCard(
         modifier = Modifier
+            .clickable(onClick = onCardClick)
             .fillMaxWidth(),
         shape = RoundedCornerShape(18.dp),
         color = CardDefaults.cardColors(

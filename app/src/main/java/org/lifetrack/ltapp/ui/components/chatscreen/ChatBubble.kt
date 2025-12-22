@@ -14,7 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.lifetrack.ltapp.model.data.dto.AlmaMessage
-import org.lifetrack.ltapp.utils.formatTimestamp
 
 @Composable
 fun ChatBubble(message: AlmaMessage) {

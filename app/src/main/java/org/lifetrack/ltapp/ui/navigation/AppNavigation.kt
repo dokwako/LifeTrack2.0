@@ -2,8 +2,10 @@ package org.lifetrack.ltapp.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import org.koin.androidx.compose.koinViewModel
 import org.lifetrack.ltapp.presenter.AnalyticPresenter
 import org.lifetrack.ltapp.presenter.AuthPresenter
@@ -29,7 +31,7 @@ fun AppNavigation(navController: NavHostController) {
 
     NavHost(
         navController = navController,
-        startDestination = "support"
+        startDestination = "home"
     ) {
 
         composable("splash") {
@@ -151,5 +153,19 @@ fun AppNavigation(navController: NavHostController) {
                 fuvPresenter = koinViewModel<FUVPresenter>()
             )
         }
+
+        composable(
+            route = "prescription_detail/{medId}",
+            arguments = listOf(navArgument("medId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val medId = backStackEntry.arguments?.getString("medId")
+
+            val prescription = analyticPresenter.dummyPrescriptions.find { it.id == medId }
+
+            if (prescription != null) {
+                PDetailScreen(navController = navController, prescription = prescription)
+            }
+        }
     }
+
 }
