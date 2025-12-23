@@ -1,42 +1,52 @@
-<!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<layer-list xmlns:android="http://schemas.android.com/apk/res/android">-->
-
-<!--    &lt;!&ndash; Background &ndash;&gt;-->
-<!--    <item>-->
-<!--        <shape android:shape="rectangle">-->
-<!--            <solid android:color="@android:color/background_dark" />-->
-<!--        </shape>-->
-<!--    </item>-->
-
-
-<!--    <item android:gravity="center">-->
-<!--        <shape android:shape="oval">-->
-<!--            <solid android:color="#22FFFFFF" />-->
-<!--            <size android:width="64dp" android:height="64dp"/>-->
-<!--        </shape>-->
-<!--    </item>-->
-
-<!--    <item android:gravity="center">-->
-<!--        <bitmap-->
-<!--            android:src="@drawable/icon_480x480_logo_dark"-->
-<!--            android:gravity="center"-->
-<!--            android:width="48dp"-->
-<!--            android:height="48dp"-->
-<!--            android:tileMode="disabled" />-->
-<!--    </item>-->
-
-<!--</layer-list>-->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="288dp"
     android:height="288dp"
     android:viewportWidth="288"
     android:viewportHeight="288">
 
-    <group
-        android:translateX="48"
-        android:translateY="48"> <path
-        android:fillColor="#FFFFFF"
-        android:pathData="M96,40 L120,40 L120,152 L96,152 Z M40,60 L64,60 L64,152 L40,152 Z" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="10"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="
+            M144,4
+            A140,140 0 1,1 143.9,4
+            Z"/>
 
-    </group>
+    <path
+        android:name="letter_l"
+        android:fillColor="#FFFFFF"
+        android:pathData="
+            M88,72
+            Q84,68 88,76
+            L88,184
+            Q88,200 104,200
+            L160,200
+            Q168,200 168,208
+            Q168,216 160,216
+            L100,216
+            Q72,216 72,184
+            L72,76
+            Q72,56 88,56
+            Z"/>
+
+    <path
+        android:name="letter_t"
+        android:fillColor="#FFFFFF"
+        android:pathData="
+            M140,84
+            Q140,68 152,68
+            L216,68
+            Q228,68 228,84
+            Q228,96 216,96
+            L192,96
+            L192,192
+            Q192,208 180,208
+            Q168,208 168,192
+            L168,96
+            L152,96
+            Q140,96 140,84
+            Z"/>
 </vector>

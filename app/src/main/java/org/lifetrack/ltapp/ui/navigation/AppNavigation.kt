@@ -21,7 +21,6 @@ import org.lifetrack.ltapp.presenter.UserPresenter
 import org.lifetrack.ltapp.ui.screens.*
 
 
-@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
 fun AppNavigation(navController: NavHostController) {
     val authPresenter = koinViewModel<AuthPresenter>()
@@ -156,15 +155,12 @@ fun AppNavigation(navController: NavHostController) {
                 fuvPresenter = koinViewModel<FUVPresenter>()
             )
         }
-
         composable(
             route = "prescription_detail/{medId}",
             arguments = listOf(navArgument("medId") { type = NavType.StringType })
         ) { backStackEntry ->
             val medId = backStackEntry.arguments?.getString("medId")
-
             val prescription = analyticPresenter.dummyPrescriptions.find { it.id == medId }
-
             if (prescription != null) {
                 PDetailScreen(navController = navController, prescription = prescription)
             }

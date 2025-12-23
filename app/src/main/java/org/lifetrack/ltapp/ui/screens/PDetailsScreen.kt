@@ -5,7 +5,6 @@ import android.content.pm.PackageManager
 import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
@@ -49,7 +48,6 @@ import org.lifetrack.ltapp.ui.components.detailscreen.SafetyInfoGrid
 import org.lifetrack.ltapp.ui.theme.Purple40
 
 
-@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PDetailScreen(
@@ -59,15 +57,25 @@ fun PDetailScreen(
     val context = LocalContext.current
     val scrollState = rememberScrollState()
 
-    var isReminderEnabled by remember { mutableStateOf(true) }
+    var isReminderEnabled by remember {
+        mutableStateOf(
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                ContextCompat.checkSelfPermission(
+                    context,
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) == PackageManager.PERMISSION_GRANTED
+            } else {
+                true
+            }
+        )
+    }
+
     val permissionLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { isGranted ->
+        isReminderEnabled = isGranted
         if (isGranted) {
-            isReminderEnabled = true
             ScheduleUtility.scheduleReminder(context, prescription)
-        } else {
-            isReminderEnabled = false
         }
     }
 
@@ -78,12 +86,13 @@ fun PDetailScreen(
                     Text(
                         "Prescription Details",
                         fontWeight = FontWeight.Bold,
-                        color = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onPrimary
-                        )
-                    },
+                        color = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.onPrimaryContainer else Color.White
+                    )
+                },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(Icons.Default.ArrowCircleLeft,
+                        Icon(
+                            Icons.Default.ArrowCircleLeft,
                             contentDescription = "Back",
                             tint = Color.White
                         )
@@ -91,11 +100,11 @@ fun PDetailScreen(
                 },
                 actions = {
                     IconButton(onClick = { /* Share logic */ }) {
-                        Icon(Icons.Default.Share, contentDescription = "Share")
+                        Icon(Icons.Default.Share, contentDescription = "Share", tint = Color.White)
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = if (isSystemInDarkTheme()) Color(0xFF121212) else Purple40//Color(0xFFF8F9FF)
+                    containerColor = if (isSystemInDarkTheme()) Color(0xFF121212) else Purple40
                 )
             )
         }
@@ -115,15 +124,20 @@ fun PDetailScreen(
                 isReminderEnabled = isReminderEnabled,
                 onReminderToggle = { enabled ->
                     if (enabled) {
-                        val status = ContextCompat.checkSelfPermission(
-                            context,
-                            Manifest.permission.POST_NOTIFICATIONS
-                        )
-                        if (status == PackageManager.PERMISSION_GRANTED) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                            val status = ContextCompat.checkSelfPermission(
+                                context,
+                                Manifest.permission.POST_NOTIFICATIONS
+                            )
+                            if (status == PackageManager.PERMISSION_GRANTED) {
+                                isReminderEnabled = true
+                                ScheduleUtility.scheduleReminder(context, prescription)
+                            } else {
+                                permissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                            }
+                        } else {
                             isReminderEnabled = true
                             ScheduleUtility.scheduleReminder(context, prescription)
-                        } else {
-                            permissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
                         }
                     } else {
                         isReminderEnabled = false
@@ -139,7 +153,6 @@ fun PDetailScreen(
                 onCallPharmacy = { context.openDialer("911") },
                 onMessageDoctor = {}
             )
-
             Spacer(modifier = Modifier.height(24.dp))
         }
     }

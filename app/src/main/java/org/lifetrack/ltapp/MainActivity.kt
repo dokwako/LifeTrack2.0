@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.activity.enableEdgeToEdge
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
+import org.lifetrack.ltapp.core.notifications.DroidNotification
 //import kotlinx.coroutines.CoroutineScope
 //import kotlinx.coroutines.Dispatchers
 //import kotlinx.coroutines.SupervisorJob
@@ -22,9 +23,10 @@ class MainActivity : ComponentActivity() {
 
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
 //        val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
         super.onCreate(savedInstanceState)
-        installSplashScreen()
+        DroidNotification.createNotificationChannel(this)
         enableEdgeToEdge()
         setContent {
             LTAppTheme {
@@ -32,10 +34,12 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    val appNavController = rememberNavController()
                     AppNavigation(
-                        rememberNavController()
+                        appNavController
 //                        scope = scope
                     )
+
                 }
             }
         }
