@@ -26,7 +26,7 @@ fun Context.openDialer(phone: String) {
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         }
         startActivity(intent)
-    } catch (e: Exception) {
+    } catch (_: Exception) {
         Toast.makeText(this, "Unable to open dialer", Toast.LENGTH_SHORT).show()
     }
 }
@@ -42,7 +42,7 @@ fun Context.openSMS(phone: String, message: String? = null) {
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         }
         startActivity(intent)
-    } catch (e: Exception) {
+    } catch (_: Exception) {
         Toast.makeText(this, "No SMS app found", Toast.LENGTH_SHORT).show()
     }
 }

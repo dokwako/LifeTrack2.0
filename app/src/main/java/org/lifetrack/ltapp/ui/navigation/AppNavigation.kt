@@ -1,7 +1,5 @@
 package org.lifetrack.ltapp.ui.navigation
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -18,7 +16,26 @@ import org.lifetrack.ltapp.presenter.HomePresenter
 import org.lifetrack.ltapp.presenter.SettingsPresenter
 import org.lifetrack.ltapp.presenter.SharedPresenter
 import org.lifetrack.ltapp.presenter.UserPresenter
-import org.lifetrack.ltapp.ui.screens.*
+import org.lifetrack.ltapp.ui.screens.AboutScreen
+import org.lifetrack.ltapp.ui.screens.AlertScreen
+import org.lifetrack.ltapp.ui.screens.AlmaScreen
+import org.lifetrack.ltapp.ui.screens.AnalyticScreen
+import org.lifetrack.ltapp.ui.screens.AppointScreen
+import org.lifetrack.ltapp.ui.screens.ChatScreen
+import org.lifetrack.ltapp.ui.screens.FollowUpScreen
+import org.lifetrack.ltapp.ui.screens.HomeScreen
+import org.lifetrack.ltapp.ui.screens.LoginScreen
+import org.lifetrack.ltapp.ui.screens.MenuScreen
+import org.lifetrack.ltapp.ui.screens.OtherScreen
+import org.lifetrack.ltapp.ui.screens.PDetailScreen
+import org.lifetrack.ltapp.ui.screens.PrescriptScreen
+import org.lifetrack.ltapp.ui.screens.ProfileScreen
+import org.lifetrack.ltapp.ui.screens.RegistrationScreen
+import org.lifetrack.ltapp.ui.screens.RestoreScreen
+import org.lifetrack.ltapp.ui.screens.SplashScreen
+import org.lifetrack.ltapp.ui.screens.SupportScreen
+import org.lifetrack.ltapp.ui.screens.TelemedicineScreen
+import org.lifetrack.ltapp.ui.screens.TimeLineScreen
 
 
 @Composable
