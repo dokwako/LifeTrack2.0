@@ -46,8 +46,8 @@ object ScheduleUtility {
         )
         val calendar = Calendar.getInstance().apply {
             timeInMillis = System.currentTimeMillis()
-            set(Calendar.HOUR_OF_DAY, 20)
-            set(Calendar.MINUTE, 0)
+            set(Calendar.HOUR_OF_DAY, 14)
+            set(Calendar.MINUTE, 3)
             set(Calendar.SECOND, 0)
             if (before(Calendar.getInstance())) {
                 add(Calendar.DATE, 1)

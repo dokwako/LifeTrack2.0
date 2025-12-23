@@ -12,11 +12,13 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DoneOutline
 import androidx.compose.material.icons.filled.NotificationsActive
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
@@ -30,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.lifetrack.ltapp.ui.components.homescreen.GlassCard
 import org.lifetrack.ltapp.ui.theme.Purple80
+
 
 @Composable
 fun DosageTrackerCard(
@@ -54,7 +57,7 @@ fun DosageTrackerCard(
                 Column {
                     Text(
                         "Next Dose Scheduled",
-                        style = MaterialTheme.typography.labelMedium,
+                        style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         fontWeight = FontWeight.ExtraBold
                     )
@@ -65,15 +68,19 @@ fun DosageTrackerCard(
                         color = MaterialTheme.colorScheme.onSurface
                     )
                 }
-                Button(
-                    onClick = { /* Log as taken logic */ },
+                IconButton(
+                    onClick = {  },
                     shape = RoundedCornerShape(12.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF4A148C),
-                        contentColor = Color.White
-                    )
+//                    modifier =
+//                    colors = ButtonDefaults.buttonColors(
+//                        containerColor = Color(0xFF4A148C),
+//                        contentColor = Color.White
+//                    )
                 ) {
-                    Text("Log Taken")
+                    Icon(
+                        Icons.Default.DoneOutline,
+                        contentDescription = "Mark as Done"
+                    )
                 }
             }
 

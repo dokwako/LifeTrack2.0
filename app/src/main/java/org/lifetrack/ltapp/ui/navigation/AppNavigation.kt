@@ -172,6 +172,7 @@ fun AppNavigation(navController: NavHostController) {
                 fuvPresenter = koinViewModel<FUVPresenter>()
             )
         }
+
         composable(
             route = "prescription_detail/{medId}",
             arguments = listOf(navArgument("medId") { type = NavType.StringType })
@@ -179,7 +180,11 @@ fun AppNavigation(navController: NavHostController) {
             val medId = backStackEntry.arguments?.getString("medId")
             val prescription = analyticPresenter.dummyPrescriptions.find { it.id == medId }
             if (prescription != null) {
-                PDetailScreen(navController = navController, prescription = prescription)
+                PDetailScreen(
+                    navController = navController,
+                    userPresenter = userPresenter,
+                    prescription = prescription
+                )
             }
         }
     }

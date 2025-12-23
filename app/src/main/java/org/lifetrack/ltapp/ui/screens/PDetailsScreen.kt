@@ -27,6 +27,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -40,7 +41,9 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import org.lifetrack.ltapp.core.utils.ScheduleUtility
 import org.lifetrack.ltapp.core.utils.openDialer
+import org.lifetrack.ltapp.core.utils.openSMS
 import org.lifetrack.ltapp.model.data.dclass.Prescription
+import org.lifetrack.ltapp.presenter.UserPresenter
 import org.lifetrack.ltapp.ui.components.detailscreen.ContactPharmacyCard
 import org.lifetrack.ltapp.ui.components.detailscreen.DetailHeaderCard
 import org.lifetrack.ltapp.ui.components.detailscreen.DosageTrackerCard
@@ -52,10 +55,12 @@ import org.lifetrack.ltapp.ui.theme.Purple40
 @Composable
 fun PDetailScreen(
     navController: NavController,
-    prescription: Prescription
+    prescription: Prescription,
+    userPresenter: UserPresenter
 ) {
     val context = LocalContext.current
     val scrollState = rememberScrollState()
+    val drPhoneNumber = userPresenter.profileInfo.collectAsState()
 
     var isReminderEnabled by remember {
         mutableStateOf(
@@ -151,7 +156,7 @@ fun PDetailScreen(
             ContactPharmacyCard(
                 prescription,
                 onCallPharmacy = { context.openDialer("911") },
-                onMessageDoctor = {}
+                onMessageDoctor = { context.openSMS(drPhoneNumber.value.userPhoneNumber)}
             )
             Spacer(modifier = Modifier.height(24.dp))
         }
