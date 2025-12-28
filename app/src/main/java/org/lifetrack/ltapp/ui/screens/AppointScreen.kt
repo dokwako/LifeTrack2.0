@@ -1,7 +1,5 @@
 package org.lifetrack.ltapp.ui.screens
 
-import androidx.compose.animation.animateColorAsState
-import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -16,15 +14,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import kotlinx.coroutines.launch
-import org.lifetrack.ltapp.model.data.dclass.Appointment
 import org.lifetrack.ltapp.model.data.dclass.statusChips
 import org.lifetrack.ltapp.presenter.UserPresenter
 import org.lifetrack.ltapp.ui.components.appointscreen.AppointmentCard
 import org.lifetrack.ltapp.ui.components.appointscreen.DoctorSelectionDropDown
 import org.lifetrack.ltapp.ui.components.appointscreen.StatusChip
+import org.lifetrack.ltapp.ui.components.appointscreen.AppointmentSwipeCard
 import org.lifetrack.ltapp.ui.theme.Purple40
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -112,6 +111,7 @@ fun AppointScreen(
                     fontWeight = FontWeight.ExtraBold,
                     style = MaterialTheme.typography.titleLarge,
                     modifier = Modifier.padding(horizontal = 16.dp),
+                    overflow = TextOverflow.Ellipsis,
                     color = if (isDark) MaterialTheme.colorScheme.primary else Purple40
                 )
             }
@@ -125,7 +125,7 @@ fun AppointScreen(
             } else {
                 items(items = appointments, key = { it.hashCode() }) { appointment ->
                     if (currentFilter != "Dismissed") {
-                        SwipeableAppointmentItem(
+                        AppointmentSwipeCard(
                             appointment = appointment,
                             onDismiss = {
                                 val originalStatus = appointment.status
@@ -163,25 +163,3 @@ fun AppointScreen(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun SwipeableAppointmentItem(appointment: Appointment, onDismiss: () -> Unit) {
-    val dismissState = rememberSwipeToDismissBoxState()
-    LaunchedEffect(dismissState.currentValue) {
-        if (dismissState.currentValue == SwipeToDismissBoxValue.EndToStart) {
-            onDismiss()
-            dismissState.snapTo(SwipeToDismissBoxValue.Settled)
-        }
-    }
-    SwipeToDismissBox(
-        state = dismissState,
-        enableDismissFromStartToEnd = false,
-        backgroundContent = {
-            val color by animateColorAsState(if (dismissState.targetValue == SwipeToDismissBoxValue.EndToStart) Color.Red.copy(0.7f) else Color.Transparent, label = "")
-            Box(Modifier.fillMaxSize().padding(horizontal = 16.dp).background(color, RoundedCornerShape(12.dp)), contentAlignment = Alignment.CenterEnd) {
-                if (dismissState.progress > 0.1f) Icon(Icons.Default.Delete, null, tint = Color.White, modifier = Modifier.padding(end = 16.dp))
-            }
-        },
-        modifier = Modifier.padding(horizontal = 16.dp)
-    ) { AppointmentCard(appointment) }
-}

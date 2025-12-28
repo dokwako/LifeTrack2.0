@@ -1,6 +1,7 @@
 package org.lifetrack.ltapp.model.data.dclass
 
 import androidx.compose.ui.graphics.vector.ImageVector
+import kotlinx.datetime.LocalDateTime
 import org.lifetrack.ltapp.R
 import java.time.LocalDate
 
@@ -68,10 +69,33 @@ data class EpidemicAlert(
     val localImageRes: Int = R.drawable.ic_medical_placeholder
 )
 
+data class SubVisit(
+    val title: String,
+    val timestamp: LocalDateTime // Production standard
+)
+
 data class HospitalVisit(
     val hospitalName: String,
     val department: String,
-    val subVisits: List<String>
+    val subVisits: List<SubVisit>
+)
+
+data class UpcomingVisit(
+    val location: String,
+    val treatment: String,
+    val timestamp: LocalDateTime
+)
+
+sealed class VisitFilter(val displayName: String) {
+    object Recent : VisitFilter("Recent Visits")
+    object Oldest : VisitFilter("Oldest First")
+    object Alphabetical : VisitFilter("Hospital A-Z")
+}
+
+val filterOptions = listOf(
+    VisitFilter.Recent,
+    VisitFilter.Oldest,
+    VisitFilter.Alphabetical
 )
 
 data class Appointment(

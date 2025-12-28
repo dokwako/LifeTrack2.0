@@ -37,7 +37,7 @@ fun MetricBadge(
                 text = value,
                 color = if (isCritical) Color(0xFFE53935) else MaterialTheme.colorScheme.onPrimaryContainer,
                 fontWeight = FontWeight.Bold,
-                fontSize = 14.sp,
+                fontSize = 12.sp,
             )
         }
         Spacer(modifier = Modifier.height(4.dp))

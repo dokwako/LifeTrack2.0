@@ -147,14 +147,15 @@ fun SupportScreen(
 
             item {
                 SectionCard(
-                    title = "About Patient Data Consent",
+                    title = "Patient Data Consent",
                     icon = Icons.Filled.Info
                 ) {
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
-                        text = "In this case you allow Alma A.I Assistant and the Doctors assigned to have access to all your health records information, for better guidance and treatment",
+                        text = "By Enabling this, you allow Alma A.I Assistant and the Doctors assigned to have access to all your health records information for better guidance and treatment",
                         style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.padding(start = 10.dp , end = 10.dp)
                     )
                     Spacer(modifier = Modifier.height(16.dp))
 //                    Row(

@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import org.lifetrack.ltapp.model.data.dclass.LabTest
 import kotlin.collections.component1
@@ -36,12 +37,16 @@ fun LabTestItem(test: LabTest) {
             ) {
                 Text(
                     text = test.name,
-                    style = MaterialTheme.typography.bodyLarge,
-                    fontWeight = FontWeight.Bold
+                    maxLines = 1,
+                    style = MaterialTheme.typography.labelLarge,
+                    fontWeight = FontWeight.Bold,
+                    overflow = TextOverflow.Ellipsis
                 )
                 Text(
                     text = test.date,
-                    style = MaterialTheme.typography.labelSmall
+                    style = MaterialTheme.typography.labelSmall,
+                    overflow = TextOverflow.Ellipsis,
+                    maxLines = 1
                 )
             }
             Spacer(modifier = Modifier.height(8.dp))

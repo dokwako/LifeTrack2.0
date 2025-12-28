@@ -47,7 +47,6 @@ fun AppNavigation(navController: NavHostController) {
     val sharedPresenter = koinViewModel<SharedPresenter>()
     val settingsPresenter = koinViewModel<SettingsPresenter>()
 
-
     NavHost(
         navController = navController,
         startDestination = "home"

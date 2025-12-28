@@ -2,6 +2,7 @@ package org.lifetrack.ltapp.ui.components.fuvscreen
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -32,52 +33,91 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import org.lifetrack.ltapp.core.utils.customFormat
 import org.lifetrack.ltapp.model.data.dclass.HospitalVisit
+import org.lifetrack.ltapp.model.data.dclass.UpcomingVisit
 import org.lifetrack.ltapp.ui.theme.Purple40
 
 
 @Composable
-fun FollowUpDetailCard(location: String, time: String, treatment: String, date:String) {
+fun FollowUpDetailCard(visit: UpcomingVisit) {
     ElevatedCard(
-        modifier = Modifier
-            .fillMaxWidth(),
+        elevation = CardDefaults.elevatedCardElevation(0.dp),
+        modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.elevatedCardColors(containerColor = MaterialTheme.colorScheme.surface)
+        colors = CardDefaults.elevatedCardColors(containerColor = if (isSystemInDarkTheme()) Color(0xFF1E1E1E)
+        else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
+//            MaterialTheme.colorScheme.surface
+        )
     ) {
-        Column(Modifier.padding(20.dp)) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(Icons.AutoMirrored.Filled.EventNote, contentDescription = null, tint = MaterialTheme.colorScheme.error)
-                Spacer(Modifier.width(8.dp))
+        Column(modifier = Modifier.padding(16.dp)) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.weight(1f)
+                ) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.EventNote,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.error,
+                        modifier = Modifier.size(20.dp)
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        text = visit.location,
+                        fontWeight = FontWeight.ExtraBold,
+                        style = MaterialTheme.typography.titleMedium,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+//                        fontSize = 14.sp
+                    )
+                }
+
+                Surface(
+                    color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.2f),
+                    shape = RoundedCornerShape(8.dp),
+                    modifier = Modifier.padding(start = 8.dp)
+                ) {
+                    Text(
+                        text = visit.timestamp.customFormat("hh:mm a"),
+                        style = MaterialTheme.typography.labelLarge,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                        softWrap = false
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(4.dp))
+
+            Column(modifier = Modifier.padding(start = 28.dp)) {
                 Text(
-                    "$location @ $time",
-                    fontWeight = FontWeight.ExtraBold,
-                    style = MaterialTheme.typography.titleMedium
+                    text = visit.treatment,
+                    style = MaterialTheme.typography.bodyLarge,
+                    fontWeight = FontWeight.Bold,
+                    color = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.primary else Purple40
+                )
+                Text(
+                    text = visit.timestamp.customFormat("EEE dd MMM yyyy"),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    fontWeight = FontWeight.SemiBold
                 )
             }
-            Spacer(Modifier.height(4.dp))
-            Text(
-                text = treatment,
-                style = MaterialTheme.typography.bodyLarge,
-                fontWeight = FontWeight.Bold,
-                color = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.primary else Purple40,
-                modifier = Modifier.padding(start = 32.dp)
-            )
-            Spacer(Modifier.height(4.dp))
-            Text(
-                text = date,
-                style = MaterialTheme.typography.bodyLarge,
-                modifier = Modifier.padding(start = 32.dp)
-            )
         }
     }
 }
 
 @Composable
 fun HospitalVisitNode(visit: HospitalVisit) {
-    Column(
-        modifier = Modifier.padding(bottom = 20.dp)
-    ) {
+    Column(modifier = Modifier.padding(bottom = 8.dp)) {
         Card(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
@@ -95,22 +135,21 @@ fun HospitalVisitNode(visit: HospitalVisit) {
                     modifier = Modifier.size(40.dp)
                 ) {
                     Icon(
-                        Icons.Default.LocalHospital,
+                        imageVector = Icons.Default.LocalHospital,
                         contentDescription = null,
                         tint = Color.White,
                         modifier = Modifier.padding(8.dp)
                     )
                 }
-                Spacer(Modifier.width(12.dp))
+                Spacer(modifier = Modifier.width(12.dp))
                 Column {
                     Text(
-                        visit.hospitalName,
+                        text = visit.hospitalName,
                         fontWeight = FontWeight.ExtraBold,
                         style = MaterialTheme.typography.bodyLarge
                     )
                     Text(
-                        visit.department,
-                        fontWeight = FontWeight.Bold,
+                        text = visit.department,
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -118,32 +157,48 @@ fun HospitalVisitNode(visit: HospitalVisit) {
             }
         }
 
-        visit.subVisits.forEach { subVisit ->
+        visit.subVisits.forEachIndexed { index, sub ->
+            val isLast = index == visit.subVisits.lastIndex
             Row(modifier = Modifier.height(IntrinsicSize.Min).padding(start = 36.dp)) {
-                Box(modifier = Modifier.width(2.dp).fillMaxHeight()) {
+                Box(modifier = Modifier.width(24.dp).fillMaxHeight()) {
                     Canvas(modifier = Modifier.fillMaxSize()) {
+                        val strokeWidth = 4f
+                        val lineColor = Color.LightGray
+
                         drawLine(
-                            color = Color.LightGray,
+                            color = lineColor,
                             start = Offset(0f, 0f),
-                            end = Offset(0f, size.height),
-                            strokeWidth = 4f
+                            end = Offset(0f, if (isLast) size.height / 2 else size.height),
+                            strokeWidth = strokeWidth
                         )
                         drawLine(
-                            color = Color.LightGray,
+                            color = lineColor,
                             start = Offset(0f, size.height / 2),
-                            end = Offset(20f, size.height / 2),
-                            strokeWidth = 4f
+                            end = Offset(15.dp.toPx(), size.height / 2),
+                            strokeWidth = strokeWidth
                         )
                     }
                 }
-                Text(
-                    text = subVisit,
-                    modifier = Modifier.padding(start = 12.dp, top = 12.dp, bottom = 12.dp),
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = FontWeight.Bold,
-                    color = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.primary else Purple40
-//                        MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
-                )
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 12.dp, horizontal = 4.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = sub.title,
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.primary else Purple40,
+                        modifier = Modifier.weight(1f)
+                    )
+                    Text(
+                        text = sub.timestamp.customFormat("MMM dd/y"),
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
             }
         }
     }

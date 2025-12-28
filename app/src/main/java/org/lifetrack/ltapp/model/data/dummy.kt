@@ -21,6 +21,8 @@ import org.lifetrack.ltapp.ui.theme.PremiumPurple
 import org.lifetrack.ltapp.ui.theme.PremiumTeal
 import java.time.LocalDate
 import java.util.Date
+import kotlinx.datetime.LocalDateTime
+import org.lifetrack.ltapp.model.data.dclass.*
 
 val epidemicAlerts = listOf(
     EpidemicAlert(
@@ -384,28 +386,59 @@ val dummyPremiums = listOf(
     )
 )
 
-val dummyHospitalData = listOf(
-    HospitalVisit(
-        "Mama Lucy Kibaki Hospital",
-        "Oncology",
-        listOf("Chemotherapy - Oct 12", "Physiotherapy - Nov 10")
-    ),
-    HospitalVisit(
-        "Mbagathi County Referral",
-        "Infectious Diseases",
-        listOf("Lab Results Review - Dec 01")
-    ),
-    HospitalVisit(
-        "Metropolitan Hospital",
-        "Cardiology",
-        listOf("ECG Scan - Nov 20", "Consultation - Nov 22")
-    ),
-    HospitalVisit(
-        "Avenue Hospital",
-        "General Surgery",
-        listOf("Post-Op Checkup - Dec 05")
+
+object ltMockData {
+    val allVisitsData = listOf(
+        HospitalVisit(
+            hospitalName = "Mama Lucy Kibaki Hospital",
+            department = "Oncology",
+            subVisits = listOf(
+                SubVisit("Chemotherapy", LocalDateTime(2025, 10, 12, 10, 0)),
+                SubVisit("Physiotherapy", LocalDateTime(2025, 11, 10, 14, 30))
+            )
+        ),
+        HospitalVisit(
+            hospitalName = "Mbagathi County Referral",
+            department = "Infectious Diseases",
+            subVisits = listOf(
+                SubVisit("Lab Results Review", LocalDateTime(2025, 12, 1, 9, 0))
+            )
+        ),
+        HospitalVisit(
+            hospitalName = "Metropolitan Hospital",
+            department = "Cardiology",
+            subVisits = listOf(
+                SubVisit("ECG Scan", LocalDateTime(2025, 11, 20, 11, 0)),
+                SubVisit("Consultation", LocalDateTime(2025, 11, 22, 10, 30))
+            )
+        ),
+        HospitalVisit(
+            hospitalName = "Avenue Hospital",
+            department = "General Surgery",
+            subVisits = listOf(
+                SubVisit("Post-Op Checkup", LocalDateTime(2025, 12, 5, 8, 15))
+            )
+        )
     )
-)
+
+    val upcomingData = listOf(
+        UpcomingVisit(
+            location = "Mama Lucy Kibaki",
+            treatment = "Chemotherapy",
+            timestamp = LocalDateTime(2025, 12, 28, 10, 0)
+        ),
+        UpcomingVisit(
+            location = "Kenyatta National",
+            treatment = "Radiology",
+            timestamp = LocalDateTime(2025, 12, 30, 14, 0)
+        ),
+        UpcomingVisit(
+            location = "Avenue Hospital",
+            treatment = "Suture Removal",
+            timestamp = LocalDateTime(2026, 1, 5, 9, 30)
+        )
+    )
+}
 
 val dummyAppointments = listOf(
     Appointment("Dr. Anya Sharma", "Mon, Oct 26", "10:00 AM", "Nairobi West Hospital", "Upcoming"),

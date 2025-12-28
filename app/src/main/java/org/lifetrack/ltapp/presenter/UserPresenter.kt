@@ -79,7 +79,6 @@ class UserPresenter : ViewModel() {
         val selectedDoc = _selectedDoctorProfile.value ?: return
         val date = "Today"
         val time = selectedDoc.availability.split("-").first().trim()
-
         val isDuplicate = _allAppointments.value.any {
             it.doctor == selectedDoc.name && it.date == date && it.time == time
         }

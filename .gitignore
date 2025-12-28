@@ -22,3 +22,6 @@ build-cache
 *.jks
 *.keystore
 *.log
+/compose-reports
+/compose-metrics
+/.kotlin/sessions

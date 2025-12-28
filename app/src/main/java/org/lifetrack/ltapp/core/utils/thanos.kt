@@ -1,5 +1,7 @@
 package org.lifetrack.ltapp.core.utils
 
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.toJavaLocalDateTime
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
@@ -23,3 +25,8 @@ fun formatTimestamp(timestamp: Long): String {
 //    fun now(): String {
 //        return LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"))
 //    }
+
+fun LocalDateTime.customFormat(pattern: String): String {
+    val formatter = DateTimeFormatter.ofPattern(pattern)
+    return this.toJavaLocalDateTime().format(formatter)
+}

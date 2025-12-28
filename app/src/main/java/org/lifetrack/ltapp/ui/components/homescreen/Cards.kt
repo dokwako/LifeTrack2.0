@@ -19,13 +19,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.MonitorHeart
-import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Thermostat
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -160,7 +158,8 @@ fun TodayScheduleCard(
                     text = appointmentCount.toString(),
                     fontSize = 64.sp,
                     fontWeight = FontWeight.ExtraBold,
-                    color = themeColor
+                    color = themeColor,
+                    modifier = Modifier.padding(start = 20.dp)
                 )
 
                 Text(
