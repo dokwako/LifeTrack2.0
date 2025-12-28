@@ -144,8 +144,8 @@ fun FollowUpScreen(
             ModalBottomSheet(
                 onDismissRequest = { fuvPresenter.setFilterSheetVisibility(false) },
                 sheetState = sheetState,
-//                containerColor = if (isSystemInDarkTheme()) Color(0xFF1E1E1E)
-//                else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
+                containerColor = if (isSystemInDarkTheme()) Color(0xFF1E1E1E)
+                else Purple40
             ) {
                 Column(
                     modifier = Modifier
@@ -156,16 +156,22 @@ fun FollowUpScreen(
                         "Sort By",
                         style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(bottom = 16.dp)
+                        modifier = Modifier.padding(bottom = 16.dp),
+                        color = Color.White
                     )
 
                     filterOptions.forEach { filter ->
                         ListItem(
-                            headlineContent = { Text(filter.displayName) },
+                            headlineContent = { Text(filter.displayName, color = Color.White, fontWeight = FontWeight.SemiBold) },
                             leadingContent = {
                                 RadioButton(
                                     selected = (filter == activeFilter),
-                                    onClick = null
+                                    onClick = { },
+                                    colors = RadioButtonDefaults.colors(
+                                        selectedColor = Color.Green,
+                                        unselectedColor = Color.White
+                                    )
+
                                 )
                             },
                             modifier = Modifier
@@ -173,7 +179,7 @@ fun FollowUpScreen(
                                 .clickable { fuvPresenter.onFilterSelected(filter) },
                             colors = ListItemDefaults.colors(
                                 containerColor = if (isSystemInDarkTheme()) Color(0xFF1E1E1E)
-                                else MaterialTheme.colorScheme.background
+                                else Purple40
                             )
                         )
                     }
