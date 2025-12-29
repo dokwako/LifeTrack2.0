@@ -476,13 +476,38 @@ object LtMockData {
         )
     )
 
+    @OptIn(kotlin.uuid.ExperimentalUuidApi::class)
     val dummyAppointments = listOf(
-        Appointment("Dr. Anya Sharma", "Mon, Oct 26", "10:00 AM", "Nairobi West Hospital", "Upcoming"),
-        Appointment("Dr. Ben Carter", "Tue, Oct 27", "10:00 AM", "Mama Lucy Kibaki", "Attended"),
-        Appointment("Dr. Hilary Otieno", "Wed, Oct 28", "09:00 AM", "Nakuru General", "Rescheduled"),
-        Appointment("Dr. Tabitha Kerry", "Thu, Oct 29", "11:30 AM", "Kabarak Mission", "Dismissed"),
-        Appointment("Dr. James Mwangi", "Fri, Oct 30", "02:00 PM", "Nairobi City", "Upcoming")
+        Appointment(
+            doctor = "Dr. Anya Sharma",
+            dateTime = LocalDateTime(2025, 12, 29, 10, 0),
+            hospital = "Nairobi West Hospital",
+            status = AppointmentStatus.UPCOMING
+        ),
+        Appointment(
+            doctor = "Dr. Ben Carter",
+            dateTime = LocalDateTime(2025, 12, 28, 14, 30),
+            hospital = "Mama Lucy Kibaki",
+            status = AppointmentStatus.ATTENDED
+        ),
+        Appointment(
+            doctor = "Dr. Hilary Otieno",
+            dateTime = LocalDateTime(2025, 12, 30, 9, 0),
+            hospital = "Nakuru General",
+            status = AppointmentStatus.UPCOMING
+        ),
+        Appointment(
+            doctor = "Dr. Tabitha Kerry",
+            dateTime = LocalDateTime(2025, 12, 15, 11, 30),
+            hospital = "Kabarak Mission",
+            status = AppointmentStatus.DISMISSED
+        ),
+        Appointment(
+            doctor = "Dr. James Mwangi",
+            dateTime = LocalDateTime(2026, 1, 5, 14, 0),
+            hospital = "Nairobi City",
+            status = AppointmentStatus.RESCHEDULED
+        )
     )
-
 }
 

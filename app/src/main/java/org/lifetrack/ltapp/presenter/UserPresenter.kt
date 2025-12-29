@@ -8,7 +8,6 @@ import kotlinx.coroutines.launch
 import org.lifetrack.ltapp.model.data.dclass.*
 import org.lifetrack.ltapp.model.data.LtMockData
 
-
 class UserPresenter : ViewModel() {
 
     private val _profileInfo = MutableStateFlow(ProfileInfo())
@@ -17,10 +16,10 @@ class UserPresenter : ViewModel() {
     private val _allAppointments = MutableStateFlow(LtMockData.dummyAppointments)
 
     val nextUpcomingAppointment = _allAppointments.map { list ->
-        list.filter { it.status.equals("Upcoming", ignoreCase = true) }.minByOrNull { it.time }
+        list.filter { it.status == AppointmentStatus.UPCOMING }.minByOrNull { it.dateTime }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
 
-    private val _selectedFilter = MutableStateFlow("Upcoming")
+    private val _selectedFilter = MutableStateFlow(AppointmentStatus.UPCOMING)
     val selectedFilter = _selectedFilter.asStateFlow()
 
     private val _userAppointments = MutableStateFlow<List<Appointment>>(emptyList())
@@ -37,7 +36,7 @@ class UserPresenter : ViewModel() {
     private fun observeAppointments() {
         viewModelScope.launch {
             combine(_allAppointments, _selectedFilter) { appointments, filter ->
-                appointments.filter { it.status.equals(filter, ignoreCase = true) }
+                appointments.filter { it.status == filter }
             }.collect { _userAppointments.value = it }
         }
     }
@@ -67,51 +66,42 @@ class UserPresenter : ViewModel() {
         navController.navigate(route) { launchSingleTop = true }
     }
 
-    fun onFilterChanged(newFilter: String) {
+    fun onFilterChanged(newFilter: AppointmentStatus) {
         _selectedFilter.value = newFilter
     }
 
-    fun getCountForStatus(status: String): Int {
-        return _allAppointments.value.count { it.status.equals(status, ignoreCase = true) }
+    fun getCountForStatus(status: AppointmentStatus): Int {
+        return _allAppointments.value.count { it.status == status }
     }
 
     fun bookAppointment() {
         val selectedDoc = _selectedDoctorProfile.value ?: return
-        val date = "Today"
-        val time = selectedDoc.availability.split("-").first().trim()
-        val isDuplicate = _allAppointments.value.any {
-            it.doctor == selectedDoc.name && it.date == date && it.time == time
-        }
-
-        if (!isDuplicate) {
-            val newAppointment = Appointment(
-                doctor = selectedDoc.name,
-                date = date,
-                time = time,
-                hospital = selectedDoc.hospital,
-                status = "Recently Booked"
-            )
-            _allAppointments.value += newAppointment
-            onFilterChanged("Recently Booked")
-            _selectedDoctorProfile.value = null
-        }
+        val newAppointment = Appointment(
+            doctor = selectedDoc.name,
+            dateTime = kotlinx.datetime.LocalDateTime(2025, 12, 29, 10, 0),
+            hospital = selectedDoc.hospital,
+            status = AppointmentStatus.RECENTLY_BOOKED
+        )
+        _allAppointments.update { it + newAppointment }
+        onFilterChanged(AppointmentStatus.RECENTLY_BOOKED)
+        _selectedDoctorProfile.value = null
     }
 
     fun dismissAppointment(appointment: Appointment) {
-        _allAppointments.value = _allAppointments.value.map {
-            if (it == appointment) it.copy(status = "Dismissed") else it
+        _allAppointments.update { list ->
+            list.map { if (it.id == appointment.id) it.copy(status = AppointmentStatus.DISMISSED) else it }
         }
     }
 
-    fun undoDismiss(appointment: Appointment, originalStatus: String) {
-        _allAppointments.value = _allAppointments.value.map {
-            if (it == appointment) it.copy(status = originalStatus) else it
+    fun undoDismiss(appointment: Appointment, originalStatus: AppointmentStatus) {
+        _allAppointments.update { list ->
+            list.map { if (it.id == appointment.id) it.copy(status = originalStatus) else it }
         }
     }
 
     fun restoreAppointment(appointment: Appointment) {
-        _allAppointments.value = _allAppointments.value.map {
-            if (it == appointment) it.copy(status = "Upcoming") else it
+        _allAppointments.update { list ->
+            list.map { if (it.id == appointment.id) it.copy(status = AppointmentStatus.UPCOMING) else it }
         }
     }
 
@@ -119,4 +109,3 @@ class UserPresenter : ViewModel() {
         _selectedDoctorProfile.value = doctor
     }
 }
-

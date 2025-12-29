@@ -18,7 +18,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import kotlinx.coroutines.launch
-import org.lifetrack.ltapp.model.data.dclass.statusChips
+import org.lifetrack.ltapp.model.data.dclass.AppointmentStatus
 import org.lifetrack.ltapp.presenter.UserPresenter
 import org.lifetrack.ltapp.ui.components.appointscreen.AppointmentCard
 import org.lifetrack.ltapp.ui.components.appointscreen.DoctorSelectionDropDown
@@ -34,7 +34,6 @@ fun AppointScreen(
 ) {
     val appointments by userPresenter.userAppointments.collectAsState()
     val currentFilter by userPresenter.selectedFilter.collectAsState()
-    val isDark = isSystemInDarkTheme()
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
 
@@ -92,14 +91,14 @@ fun AppointScreen(
                     contentPadding = PaddingValues(horizontal = 16.dp),
                     horizontalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
-                    items(statusChips) { chip ->
+                    items(AppointmentStatus.entries) { status ->
                         StatusChip(
-                            label = chip.label,
-                            count = userPresenter.getCountForStatus(chip.label).toString(),
-                            accentColor = chip.color,
-                            icon = chip.icon,
-                            isSelected = currentFilter == chip.label,
-                            onClick = { userPresenter.onFilterChanged(chip.label) }
+                            label = status.label,
+                            count = userPresenter.getCountForStatus(status).toString(),
+                            accentColor = status.color,
+                            icon = status.icon,
+                            isSelected = currentFilter == status,
+                            onClick = { userPresenter.onFilterChanged(status) }
                         )
                     }
                 }
@@ -107,25 +106,25 @@ fun AppointScreen(
 
             item {
                 Text(
-                    text = "$currentFilter Appointments",
+                    text = "${currentFilter.label} Appointments",
                     fontWeight = FontWeight.ExtraBold,
                     style = MaterialTheme.typography.titleLarge,
                     modifier = Modifier.padding(horizontal = 16.dp),
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 1,
-                    color = if (isDark) MaterialTheme.colorScheme.primary else Purple40
+                    color = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.primary else Purple40
                 )
             }
 
             if (appointments.isEmpty()) {
                 item {
                     Box(Modifier.fillMaxWidth().padding(32.dp), contentAlignment = Alignment.Center) {
-                        Text("No $currentFilter appointments found.", color = Color.Gray)
+                        Text("No ${currentFilter.label} appointments found.", color = Color.Gray)
                     }
                 }
             } else {
-                items(items = appointments, key = { it.hashCode() }) { appointment ->
-                    if (currentFilter != "Dismissed") {
+                items(items = appointments, key = { it.id }) { appointment ->
+                    if (currentFilter != AppointmentStatus.DISMISSED) {
                         AppointmentSwipeCard(
                             appointment = appointment,
                             onDismiss = {
@@ -163,4 +162,3 @@ fun AppointScreen(
         }
     }
 }
-

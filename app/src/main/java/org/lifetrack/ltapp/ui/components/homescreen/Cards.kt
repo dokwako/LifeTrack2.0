@@ -40,6 +40,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import org.lifetrack.ltapp.core.utils.customFormat
 import org.lifetrack.ltapp.model.data.dclass.Appointment
 import org.lifetrack.ltapp.ui.theme.Purple40
 import org.lifetrack.ltapp.ui.theme.Purple80
@@ -188,12 +189,13 @@ fun TodayScheduleCard(
 
                 if (nextAppointment != null) {
                     Text(
-                        text = nextAppointment.time,
+                        text = nextAppointment.dateTime.customFormat("hh:mm a"),
                         fontSize = 28.sp,
                         fontWeight = FontWeight.Black,
                         color = themeColor,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
+                        softWrap = false
                     )
                     Text(
                         text = nextAppointment.doctor,

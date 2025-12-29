@@ -34,14 +34,6 @@ val menuListItems: Collection<MenuItemData> = mutableListOf(
     MenuItemData("About LifeTrack", Icons.Filled.Info, "about", rightIcon = null)
 )
 
-val statusChips = listOf(
-    StatusChipData("Upcoming", Color(0xFF6200EE), Icons.Default.CalendarMonth),
-    StatusChipData("Attended", Color(0xFF2ECC71), Icons.Default.CheckCircle),
-    StatusChipData("Recently Booked", Color(0xFF7E57C2), Icons.Default.NewReleases),
-    StatusChipData("Rescheduled", Color(0xFFE67E22), Icons.Default.History),
-    StatusChipData("Dismissed", Color.Gray, Icons.Default.Cancel)
-)
-
 
 
 

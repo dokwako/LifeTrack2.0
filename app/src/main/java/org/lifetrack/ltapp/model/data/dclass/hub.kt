@@ -4,6 +4,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import kotlinx.datetime.LocalDateTime
 import org.lifetrack.ltapp.R
 import java.time.LocalDate
+import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
 
 data class MissionItem(
     val id: Int,
@@ -81,12 +83,12 @@ data class UpcomingVisit(
     val timestamp: LocalDateTime
 )
 
-data class Appointment(
+data class Appointment @OptIn(ExperimentalUuidApi::class) constructor(
+    val id: String = Uuid.random().toString(),
     val doctor: String,
-    val date: String,
-    val time: String,
+    val dateTime: LocalDateTime,
     val hospital: String,
-    val status: String
+    val status: AppointmentStatus
 )
 
 data class Prescription(
